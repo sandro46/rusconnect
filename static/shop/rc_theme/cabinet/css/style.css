@@ -1,0 +1,448 @@
+
+
+.cabinetMain {
+	background-color: #fff;
+    margin: 20px auto;
+	display: table;
+}
+
+.cabinetMain.fluid {
+	margin-top: 100px;
+	padding-top: 20px;
+}
+
+.cabinetMain .contentLeft {
+	display: table-cell;
+	border-right: solid #d5d5d5 2px;
+	background-color: #eaeaea;
+}
+
+.cabinetMain .contentCenter {
+	display: table-cell;
+	border-right: solid #d5d5d5 2px;
+	vertical-align: top;	
+}
+
+.cabinetMain .contentCenter .header {
+	padding-top: 26px;
+	padding-bottom: 20px;
+	height: 50px;
+	vertical-align: middle;
+	border-bottom: solid #d5d5d5 2px;
+	margin-left: 22px;
+	margin-right: 22px;
+	margin-bottom: 40px;
+}
+
+.cabinetMain .contentCenter .header h1 {
+	color: #505050;
+	display: inline-block;
+	font-size: 22px;
+}
+
+.cabinetMain .contentCenter .header h1 img {
+	width: 48px;
+	height: 48px;
+}
+
+.cabinetMain .contentCenter .header h1 span {
+	position: relative;
+    top: -15px;
+	padding-left: 17px;
+}
+
+.cabinetMain .contentCenter .header .button {
+    font-family: "Elektra Medium Pro",sans-serif;
+	background-color: #e8e8e8;
+    background-image: url("../images/arrow-right.png");
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    color: #4c67d8;
+    display: inline-block;
+    float: right;
+    padding-bottom: 9px;
+    padding-right: 26px;
+    top: 8px;
+	position: relative;
+}
+
+.cabinetMain .contentCenter .header .button:hover {
+	background-color: #D6D6D6;
+}
+
+#cabinetMainContent {
+	margin-left: 22px;
+	margin-right: 22px;
+}
+
+.cabinetMain .contentRight {
+	display: table-cell;
+	vertical-align: top;
+	background-color: #eaeaea;
+}
+
+.cabinetMain .leftLogo {
+	border-bottom: solid #e8e8e8 1px;
+}
+
+.cabinetMain .cabinetMenu {
+	margin-left: 20px;
+	margin-right: 16px;
+	margin-top: 16px;
+	vertical-align: top;
+}
+
+.cabinetMain .cabinetMenu li a {
+	line-height: 30px;
+	font-size: 13px;
+	 font-family: "Elektra Medium Pro",sans-serif;
+	color: #505050;
+	text-decoration: none;
+	padding-bottom: 8px;
+    padding-top: 8px;
+	font-weight: normal;
+}
+
+.cabinetMain .cabinetMenu li i.icon {
+	background-image: url('../images/cabinet.menu.sprite.png');
+}
+
+.cabinetMain .cabinetMenu li.active i.icon {
+	background-image: url('../images/cabinet.menu.sprite.active.png');
+}
+
+.cabinetMain .chatHeader i.icon {
+	background-image: url('../images/cabinet.menu.sprite.png');
+	margin:0px;
+}
+
+.cabinetMain .cabinetMenu li.active a {
+	color: #fe9508;
+}
+
+.cabinetMain .cabinetMenu li:hover {
+	background-color: #d7d7d7;
+}
+
+.cabinetMain .small_button {
+ 	font-family: "Elektra Medium Pro",sans-serif;
+	background-color: #e8e8e8;
+    color: #4c67d8;
+    display: inline-block; 
+    top: 8px;
+	position: relative;
+	color:#505050;
+    text-align: center;
+    font-size: 12px;
+    border-radius: 3px;
+    text-decoration: none;
+	padding: 8px 10px;
+}
+
+.successMessage {
+	background-color: #c8e5bc;
+    border: 1px solid #b2dba1;
+    box-sizing: border-box;
+    color: #3c763d;
+    display: none;
+    font-size: 13px;
+    margin-top: 14px;
+    padding: 15px;
+}
+
+
+/* icon sprite */
+.cabinetMain .icon {
+	display: inline-block;
+	width: 22px;
+	height: 20px;
+	margin-left: 8px;
+    margin-right: 8px;
+	position: relative;
+    top: 6px;
+	
+}
+
+
+.cabinetMain .small-form { width: 60% }
+.cabinetMain .icon.user { background-position: -3px 0px; }
+.cabinetMain .icon.vcard { background-position: -2px 223px; }
+.cabinetMain .icon.home { background-position: -2px 192px;  }
+.cabinetMain .icon.discount { background-position: -3px 412px;  }
+.cabinetMain .icon.billing { background-position: -2px 379px  }
+.cabinetMain .icon.box { background-position: -1px 87px  }
+
+.cabinetMain .action-icon  {
+	display: inline-block;
+	height: 21px;
+    width: 21px;
+	margin-right: 15px;
+}
+
+
+.cabinetMain .action-icon {
+	background-repeat:no-repeat;
+	background-image: url('../images/cabinet.icon.png');
+}
+
+.cabinetMain .action-icon:hover {
+	background-image: url('../images/cabinet.icon.active.png');
+}
+
+.cabinetMain .action-icon.edit {
+	 background-position: -32px 0;
+}
+
+.cabinetMain .action-icon.add {
+	  background-position: 2px 0;
+}
+
+.cabinetMain a {
+	text-decoration: none;
+	/* color: #4e67de; */
+}
+
+.cabinetMain a:hover {
+	text-decoration: underline;
+	/* color: #4e67de; */
+}
+
+
+/* chat module */
+
+#nodeChatbox * {
+	font-family: Verdana,Geneva,sans-serif;
+}
+
+#nodeChatbox {
+	margin-left: 18px;
+	margin-right: 18px
+}
+
+#nodeChatbox .chatHeader {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-bottom: solid #d5d5d5 1px;
+	margin-bottom: 15px;
+}
+
+#nodeChatbox .chatHeader h1 {
+	font-size: 14px;
+	color: #4c67d8;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+#nodeChatbox .chatHeader span {
+	font-size: 12px;
+}
+
+#nodeChatbox .message {
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+
+#nodeChatbox .message .body {
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background-color: #fff;
+	font-size: 12px;
+	padding: 10px 12px 10px 12px;
+	margin-top: 8px;
+	margin-bottom: 5px;
+	line-height: 14px;
+}
+
+#nodeChatbox .message .title {
+	font-weight: bold;
+}
+
+#nodeChatbox .message .title .date {
+	color: #7a7a7a;
+	font-weight: normal;
+	float: right;
+	font-size: 10px;
+	padding-top: 3px;
+}
+
+#nodeChatbox .message.incoming .body {
+	background-color: #D4EDFC;
+}
+
+#nodeChatbox .message.incoming .title {
+	color: #4c67d8;
+}
+
+#nodeChatbox .chatbox {
+	height: 400px;
+	overflow: hidden;
+	
+}
+
+#nodeChatbox .sendBox {
+	margin-top:17px;
+	padding-top:17px;
+	border-top: solid #d5d5d5 1px;
+	padding-bottom: 17px;
+}
+#nodeChatbox .sendBox textarea {
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	border:solid 1px #f3f3f3;
+	font-size: 12px;
+	width: 100%;
+	height: 77px;
+	padding: 4px;
+}
+
+#nodeChatbox .sendBox .button {
+	margin-top: 10px;
+}
+
+
+
+
+/*  main page  */
+#cabinetMainContent h2 {
+	font-size: 18px;
+	margin-bottom: 15px;
+}
+#cabinetMainContent h1 {
+	margin-top: 30px;
+	font-size: 18px;
+	color: #fe9508;
+	margin-bottom: 20px;
+}
+
+#cabinetMainContent p {
+	font-size: 13px;
+}
+
+#cabinetMainContent .index-block {
+	width: 100%;
+}
+
+#cabinetMainContent .index-block h3 {
+	font-size: 16px;
+	background-image: url("../images/cabinet.menu.sprite.active.png");
+	background-repeat: no-repeat;
+	padding-left: 36px;
+	line-height: 24px;
+}
+
+#cabinetMainContent .index-block  .widget-button {
+	float: right;
+	right: -15px;
+	position: relative;
+}
+
+#cabinetMainContent .index-block .strong-data {
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+
+#cabinetMainContent .index-block .strong-data div {
+	font-weight: bold;
+	color: #505050;
+	line-height: 16px;
+	font-size: 13px;
+}
+#cabinetMainContent .index-block .normal-data {
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+
+#cabinetMainContent .index-block .normal-data div {
+	font-weight: normal;
+	color: #505050;
+	line-height: 16px;
+	font-size: 13px;
+}
+
+
+#cabinetMainContent .personal .cabinet-block-icon {
+	background-position: 0 -32px;
+}
+
+#cabinetMainContent .address .cabinet-block-icon {
+	background-position: 0 -63px;
+}
+
+#cabinetMainContent .discount .cabinet-block-icon {
+	background-position: 0 -101px;
+}
+
+#cabinetMainContent .billing .cabinet-block-icon {
+	background-position: 0 -134px;
+}
+
+#cabinetMainContent .address .normal-data {
+	margin-left: 5px;
+}
+
+
+
+#cabinetMainContent .index-block .block-left {
+	width: 50%;
+	border-right: solid 1px #d5d5d5;
+	border-top: solid 2px #d5d5d5;
+	position: relative;
+	right: 1px;
+	padding: 15px;
+	float: left;
+	box-sizing: border-box;
+	min-height: 175px;
+}
+
+#cabinetMainContent .index-block .block-right {
+	width: 50%;
+	border-left: solid 1px #d5d5d5;
+	border-top: solid 2px #d5d5d5;
+	position: relative;
+	left: -1px;
+	float: left;
+	padding: 15px;
+	box-sizing: border-box;
+	min-height: 175px;
+}
+
+#cabinetMainContent .index-block .discount {
+	border-bottom: solid 2px #d5d5d5;
+}
+
+#cabinetMainContent .index-block .billing {
+	border-bottom: solid 2px #d5d5d5;
+}
+
+#cabinetMainContent .right_button {
+	display: inline-block;
+    float: right;
+    margin-top: -41px;
+    top: auto;
+}
+
+#cabinetMainContent table.orders {
+	margin-bottom: 35px;
+}
+
+#cabinetMainContent table.orders thead {
+	background-color: #ebebeb;
+}
+#cabinetMainContent table.orders thead th {
+	font-size: 13px;
+    font-weight: normal;
+    line-height: 35px;
+    padding: 5px 0 0;
+    vertical-align: middle;
+	white-space: nowrap;
+}
+#cabinetMainContent table.orders tbody tr {
+	border-bottom: solid 2px #d5d5d5;
+}
+
+#cabinetMainContent table.orders tbody tr td {
+	font-size: 13px;
+    padding: 10px;
+}

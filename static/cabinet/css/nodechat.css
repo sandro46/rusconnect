@@ -1,0 +1,9 @@
+.msguserlist-title{color: #22878E; font-weight: bold; margin-left: 20px;}
+.msguserlist {list-style: none outside none;}
+.msguserlist li{margin:10px 0; cursor:pointer;}
+.msguserlist .new-msg{font-weight:bold; color:green}
+.msguserlist .opened-dialog {font-weight:bold;}
+.chat-form .btn-cont {float: right;margin-top: -8px;position: relative;}
+.chat-form .input-cont {margin-right: 0px;}
+.msguserlist li.active { background-color: #DDDDDD; background-image: url("../img/bread-crumb-last_1.png"); background-position: right center; background-repeat: no-repeat; text-shadow: 1px 1px #FFFFFF;}
+.msguserlist li { cursor: pointer;  margin: 10px 0; padding: 0 0 2px 5px;}

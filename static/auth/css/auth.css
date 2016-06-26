@@ -1,0 +1,284 @@
+body {
+    color: 	#868686;
+    font-family: 'Arial';
+    padding: 0px !important;
+    margin: 0px !important;
+    font-size:13px;
+}
+
+#login-body {
+    background-color: #f7f7f7  !important;
+	background-image: url("../img/body-bg.png") !important;
+}
+#login {
+
+    background:#e3e3e3;
+    box-shadow: 1px 0 1px #FFFFFF, 0 0 3px rgba(0, 0, 0, 0.2) inset;
+    -moz-box-shadow: 1px 0 1px #FFFFFF, 0 0 3px rgba(0, 0, 0, 0.2) inset;
+    -webkit-box-shadow: 1px 0 1px #FFFFFF, 0 0 3px rgba(0, 0, 0, 0.2) inset;
+    width: 370px;
+    margin: 150px auto 0;
+    padding: 20px;
+}
+
+.login-btn {
+    background: url("../img/login-btn.jpg");
+    border: none;
+    box-shadow: 1px 0 1px #FFFFFF, 0 0 3px rgba(0, 0, 0, 0.2) inset;
+    -moz-box-shadow: 1px 0 1px #FFFFFF, 0 0 3px rgba(0, 0, 0, 0.2) inset;
+    -webkit-box-shadow: 1px 0 1px #FFFFFF, 0 0 3px rgba(0, 0, 0, 0.2) inset;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    font-size: 16px;
+    color: #fff;
+    text-shadow: none;
+    padding: 10px 0;
+}
+
+.login-btn:hover {
+    opacity: 0.8;
+    color: #fff;
+}
+
+#login .control-group {
+    margin-bottom: -11px;
+}
+
+#login .form-actions {
+    padding: 20px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: 0px;
+    -webkit-border-radius: 0px 0px 4px 4px;
+    -moz-border-radius: 0px 0px 4px 4px;
+    border-radius: 0px 0px 4px 4px;
+    margin-bottom: -37px;
+}
+
+#login input {
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+}
+#login input[type=checkbox] {
+    margin-top: -3px;
+}
+#login span.add-on {
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    padding: 10px;
+    color: #828283;
+    text-shadow: none;
+}
+
+#login input {
+    padding: 10px;
+}
+
+#login i {
+    color: #999 !important;
+}
+
+#login #forget-password {
+    font-size: 14px;
+}
+
+#login-copyright {
+    text-align: center;
+    width: 250px;
+    margin: 0 auto;
+    padding: 10px 10px 0 10px;
+    color: #999;
+    font-size: 11px;
+}
+
+.control-wrap {
+    width: 266px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+#login .lock {
+    width: 100px;
+    float: left;
+    margin-top: 28px;
+    font-size: 110px;
+    vertical-align: middle;
+}
+
+#login .lock i {
+    vertical-align: middle;
+}
+
+#forgotform #input-email {
+    width: 312px;
+}
+
+
+/* fix for font awesome icon classes */
+[class^="icon-"], [class*=" icon-"],[class^="icon-"]:hover, [class*=" icon-"]:hover {
+    background: none !important;
+}
+
+/* hide by default, used to handle elements to show only for ie8*/
+.visible-ie8 {
+    display: none;
+}
+
+/* general typography*/
+h3 small, h2 small, h5 small {
+    color: #868686;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
+
+h1.block, h2.block, h3.block, h4.block, h5.block, h6.block {
+    padding-bottom: 10px;
+}
+
+.no-padding {
+    padding: 0px !important;
+}
+.no-margin {
+    margin: 0px !important;
+}
+.no-bottom-space {
+    padding-bottom:0px !important;
+    margin-bottom: 0px !important;
+}
+.no-top-space {
+    padding-top:0px !important;
+    margin-top: 0px !important;
+}
+.block-margin-bottom-5 {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+.hide {
+    display: none;
+}
+.bold {
+    font-weight:bold;
+}
+
+.fix-margin {
+    margin-left: 0px !important
+}
+
+.border {
+    border: 1px solid #ddd
+}
+
+.small {
+    font-size: 11px !important;
+}
+
+.btn-top-space {
+    margin-top: 5px !important;
+}
+
+.italic {
+    font-style: italic !important;
+}
+
+i.big {
+    font-size: 20px;
+}
+
+i.warning {
+    color: #E74955;
+}
+
+i.critical {
+    color: #22878E;
+}
+
+i.normal {
+    color: #A5D16C;
+}
+
+hr {
+    margin: 15px 0;
+    border: 0;
+    border-top: 1px solid #E0DFDF;
+    border-bottom: 1px solid #FEFEFE;
+}
+
+i.icon, a.icon {
+    color: #999;
+}
+
+a.icon:hover {
+    text-decoration: none;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    opacity: .4;
+}
+
+a.icon.huge i{
+    font-size: 16px !important;
+}
+
+.space5 {
+    display: block;
+    height: 5px !important;
+    clear: both;
+}
+
+.space7 {
+    height: 7px !important;
+    clear: both;
+}
+
+.space10 {
+    height: 10px !important;
+    clear: both;
+}
+
+.space12 {
+    height: 12px !important;
+    clear: both;
+}
+
+.space15 {
+    height: 15px !important;
+    clear: both;
+}
+
+.space20 {
+    height: 20px !important;
+    clear: both;
+}
+
+.mtop5 {
+    margin-top: 5px
+}
+
+.mtop7 {
+    margin-top: 7px
+}
+
+.mtop10 {
+    margin-top: 10px
+}
+
+.no-text-shadow {
+    text-shadow: none !important;
+}
+
+.notify-row {
+    float: left;
+    padding: 5px;
+}
+
+a,a:focus, a:hover, a:active {
+    outline: 0;
+}

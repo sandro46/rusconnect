@@ -1,0 +1,47 @@
+<div style="margin-bottom: 50px">
+  <h2 style="float:left;margin-right: 24px;">CRM &ndash; Компании</h2> 
+  <button  style="float:left" class="i_plus icon small" onclick="openAddCRMCompanyDialog(false)">Добавить компанию</button>
+</div>
+
+<ul class="gridFilters bg01">
+  <li class="title ml-s">Название</li>
+  <li class="filter" style="margin-top:-5px;"><input style="position:relative; z-index:99; width:100px" class="grid-find-input" type="text" filter="name" grid="companies" value=""></li>
+  <li class="title ml-s">Бренд</li>
+  <li class="filter" style="margin-top:-5px;"><input style="position:relative; z-index:99; width:100px" class="grid-find-input" type="text" filter="brand" grid="companies" value=""></li>
+  
+  
+  <li class="title ml">Источник</li>
+  <li class="filter">
+    <select id="filter-status" onchange="if(this.value  != 0) { grid.companies.addFilter('sourceId', this.value).start(); } else  { grid.companies.removeFilter('sourceId').start();}">
+      <option value="0" selected="selected">Любой</option>
+      {foreach from=$companySources as=item}
+        <option value="{$item.id}">{$item.name}</option>
+      {/foreach}
+    </select>
+  </li>
+</ul>
+<br style="clear:both">
+
+
+{supergrid name=companies tpl=grid.defaul.html class=crm_client method=getCompanies}
+  cols : [
+    {name : "company_name", title:"Компания", align:"center", search:true, sort:true},
+    {name : "brand", title:"Бренд", align:"center", search:true, sort:true},
+    {name : "creator_name", title:"Добавил", align:"center", search:true, sort:true},
+    {name : "source_name", title:"Источник", align:"center", search:true, sort:true},
+    {name : "date", title:"Дата добавления", align:"center", search:true, sort:true}
+ ],
+ 
+ autoload:true,
+ click:"openEditCRMcompanyDialog({id})",
+ view : "list",
+ class:["odd","even"],
+ limit : 20
+{/grid}
+
+
+
+
+{include company_dialogs.html}
+
+

@@ -1,0 +1,149 @@
+<div id="addDialDialog" style="display:none">
+	<form id="form5">         
+	  <fieldset>
+	    <section>
+	      <label for="text_field">Название</label>               
+	      <div>
+	        <input type="text" id="deal-name" name="main_name" value="">
+	      </div>             
+	    </section>
+	    <section>
+	      <label for="text_field">Продукт / услуга</label>               
+	      <div>
+	        <input type="text" id="deal-product" name="main_name" value="">
+	      </div>             
+	    </section>
+	    <section>
+	       <label for="text_field">Этап</label>               
+	       <div>
+	         <select id="deal-phase">
+	           {foreach from=$dealPhases as=item}
+	            <option value="{$item.id}">{$item.name}</option>
+	           {/foreach}
+	         </select>
+	       </div>             
+	     </section>
+	    <section id="deal-statusBlock">
+	       <label for="text_field">Статус сделки</label>               
+	       <div>
+	         <select id="deal-status">
+	           {foreach from=$dealStatuses as=item}
+	            <option value="{$item.id}">{$item.name}</option>
+	           {/foreach}
+	         </select>
+	       </div>             
+	    </section>
+	    <section>
+	       <label for="text_field">Ответсвенный</label>               
+	       <div>
+	         	<select id="deal-responsible">
+			      {foreach from=$myUsers as=item}
+			        <option value="{$item.id}">{$item.name}</option>
+			      {/foreach}
+			    </select>
+	       </div>             
+	     </section>
+	     
+	    <section>
+	       <label for="text_field">Компания</label>               
+	       <div>
+	         <input type="text" id="deal-company" instance2="companies" style="width:300px">
+	         <a href="javascript:void(0)" onclick="openAddCRMCompanyDialog(false)">Новая компания</a>
+	       </div>             
+	     </section>
+	    <section>
+	       <label for="text_field">Сумма контракта</label>               
+	       <div>
+	         <input type="text" id="deal-volume" name="main_name" value="" style="width:200px">
+	       </div>             
+	     </section>
+	     <section id="deal-showMapButton">
+	     	<div>
+	     		 <button class="green icon i_v-card" id="dealMapButton" style="width:100%; display:none">Карточка сделки</button>
+	     	</div>
+	     </section>
+	  </fieldset> 
+	  <fieldset>
+	    	<button onclick="$('#addDialDialog').dialog('destroy');" style="float:right;">Закрыть</button>
+	    	<button id="deal-SaveButton" class="save" style="float:right;">Сохранить</button>
+	    	<button id="deal-DeleteButton" class="delete red icon i_trashcan" style="float:left; display:none">Удалить</button>
+	  </fieldset>
+  	</form>
+</div>
+
+<div id="dealMap" style="display:none">
+  <div class="tab" id="dealMapTabs">
+    <ul>
+      <li><a href="#tabs-1">Договор</a></li>
+      <li><a href="#tabs-2">Контакты</a></li>
+      <li><a href="#tabs-3" id="dealMapTabs3">Задачи / коментарии</a></li>
+    </ul>
+    <div id="tabs-1">
+	    <form>         
+		  <fieldset>
+		    <section>
+		      <label for="text_field">№ договора</label>               
+		      <div>
+		        <input type="text" id="dealmap-contract_no" name="main_name" value="">
+		      </div>             
+		    </section>
+		    <section>
+		      <label for="text_field">Дата договора</label>               
+		      <div>
+		        <input type="text" id="dealmap-contract_date" name="main_name" value="">
+		      </div>             
+		    </section>
+		    <section>
+		      <label for="text_field">Статус договора</label>               
+		      <div>
+			        <select id="dealmap-contract_status">
+				      {foreach from=$map_contract_status as=item}
+				        <option value="{$item.id}">{$item.name}</option>
+				      {/foreach}
+				    </select>
+		      </div>             
+		    </section>
+		  </fieldset>
+		</form>
+    </div>
+	<div id="tabs-2">
+   		<div class="tabContent">
+			{supergrid name=dealcontacts tpl=grid.defaul.html class=crm_client method=getContacts}
+			  cols : [
+			        {name : "contact_name", title:"ФИО", align:"center", search:true, sort:true},
+				    {name : "post", title:"должность", align:"center", search:true, sort:true},
+				    {name : "source_name", title:"источник", align:"center", search:true, sort:true},
+				    {name : "responsible_user_name", title:"ответств.", align:"center", search:true, sort:true},
+				    {name : "date", title:"добавлен", align:"center", search:true, sort:true},
+				    {name : "create_user_name", title:"добавил", align:"center", search:true, sort:true}
+			 ],
+			 
+			 autoload:false,
+			 click: "showContact({id})",
+			 view : "list",
+			 class:["odd","even"],
+			 limit : 20
+			{/grid}
+			
+		</div>
+    </div>
+    <div id="tabs-3">
+    	<div class="tabContent">
+			<div style="height: 280px; overflow: auto;" class="widget contactWidgetComments">
+				
+			</div>
+			<br style="clear:both">
+			<button class="green i_user_comment icon small" id="dealMapEdit-addComment" style="float:left" onclick="addContactComment()">Добавить примечание</button>
+			<button class="green i_alarm_clock icon small" id="dealMapEdit-addTask" style="float:left" >Добавить задачу</button>
+			<br style="clear:both">
+		</div>
+    
+    </div>
+  </div>
+  <form>         
+ 	<fieldset>
+    	<button onclick="$('#dealMap').dialog('destroy');" style="float:right;">Отменить изменения</button>
+    	<button id="dealMapEdit-SaveButton" class="save" style="float:right;">Сохранить</button>
+  	</fieldset>
+  </form>
+</div>

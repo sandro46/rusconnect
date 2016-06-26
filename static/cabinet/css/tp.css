@@ -1,0 +1,80 @@
+.gridFilters .filter-caption{font-size:18px;height:40px;line-height:40px;margin-left:-9px;margin-right:20px;margin-top:-13px;text-align:center;width:90px;}
+  
+  .tree-div ul, .tree-div li{margin:0 0 0 15px; padding:0;  list-style-image: url("http://www.funambol.com/blog/capo/images/icon_arrow_right.png");}
+  .shop-list {margin-bottom:5px}
+  .shop-list th{vertical-align: middle;}
+  .shop-list .item{border-bottom:1px #eee dashed}
+  .shop-list .item:last-child{border-bottom:none}
+  .shop-list td{vertical-align: middle;}
+  .shop-list th, .shop-list td{border:none;text-align: center;}
+  .shop-list .title{font-size:18px}
+  .shop-list .title div{float:left}
+  .shop-list a{    background-position: -1px -1px;}
+  .shop-list .status .st1{color:green;margin-right:10px}
+  .shop-list .status .st2{color:#6F6F6F; text-decoration:underline}
+  .shop-list .main-info{margin-bottom: 12px; margin-top: 12px;}
+  .shop-list .act-buttons{float:right; margin-top:-35px;}
+  .shop-list .addition-items a{text-decoration:none; border-bottom:1px dashed;}
+  .shop-list .item-button {background-size: cover; width:20px; height:20px; cursor:pointer;float: left;margin-right: 3px;}
+  .shop-list div.ii_copy{background-image:url('/templates/admin/green/images/icons/dark/Toolbar - Copy.png')}
+  .shop-list div.ii_pencil{background-image:url('/templates/admin/green/images/icons/dark/Pencil.png')}
+  .shop-list div.ii_trashcan{background-position: -2px -5px; width: 25px;background-image:url('/templates/admin/green/images/icons/dark/Trash - Empty.png')}
+  .shop-list .sort-btn {width:50px; height:40px;float:right;}
+  .shop-list .sort-btn div{width:20px; height:20px;float:left; background-repeat: no-repeat;}
+  .shop-list .sort-btn .move-up{background-image:url('/templates/admin/green/images/icons/dark/view-sort-ascending_9481.png')}
+  .shop-list .sort-btn .move-top{background-image:url('/templates/admin/green/images/icons/dark/view-sort-descending_6787.png')}
+  .shop-list .sort-btn .move-down{background-image:url('/templates/admin/green/images/icons/dark/gtk-sort-descending_9034.png');clear:both;}
+  .shop-list .sort-btn .move-bottom{background-image:url('/templates/admin/green/images/icons/dark/view-sort-ascending_8028.png')}
+  .shop-list .item-button-fast{float:right;background-size: cover; width:20px; height:20px; cursor:pointer;}
+  .shop-list .item .type span,
+  .shop-list .item .price span,
+  .shop-list .item .sale span,
+  .shop-list .item .availability span {border-bottom: 1px grey dashed; cursor:pointer}
+.folder-div { background-size: cover; width:50px; height:50px; background-image:url('/templates/admin/green/images/icons/dark/Folder.png'); } 
+  
+  
+  .group-act-btn{height: 28px;vertical-align: top;}
+  
+  
+  #price-edit {margin: 0 auto;    width: 100px;}
+  #price-edit select{float: right;    height: 26px;    width: 55px;}
+  #price-edit table,
+  #price-edit table tr,
+  #price-edit table td{margin:0; padding:0}
+  
+  
+  .addition-form th,
+  .addition-form td{vertical-align: middle;text-align: center;}
+  .addition-form .txtleft{text-align: left;}
+  .addition-form .title{color: #777777;text-shadow: 0 2px 0 #FFFFFF;font-size: 22px;}
+  .addition-form .add{float:right}
+  .addition-form .title{float:left}
+  #edit-item-price-block div, #edit-item-sale-block div{clear: none;}
+  
+  
+  #addProdukt div.no-padding{padding:0}
+  .abtn{background-position: -1px -1px !important;}
+  
+  
+  .available-variant div{clear:none; float:left}
+  #saleVariants div.saleItem{clear:both; margin-bottom:10px}
+  #saleVariants .saleItem input{width:40px;vertical-align: top; float:left}
+  #saleVariants .saleItem input.inpMeasure{width:50px !important}
+  #saleVariants .saleItem div{float:left}
+
+
+
+ #order-params section label{width:23%} 
+    #client-info section label{width:23%} 
+    #order-params section div{width:67%} 
+    #client-info section div{width:67%} 
+
+ .table-order td, .table-order th {vertical-align:middle; text-align:center;}
+    .table-order .order-color {padding: 0; width: 1px;}
+    .table-order .status-red{background:#f77;}
+    .table-order .status-green{background:#7f7;}
+    .table-order .status-yellow{background:#aa0;}
+    #order-form td.order-list-action{width:20px}
+    #order-form td.order-list-action a {background-position: -1px -1px;}
+    
+    #order-items td{vertical-align:middle; text-align:center;}

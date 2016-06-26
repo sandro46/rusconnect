@@ -1,0 +1,61 @@
+<div id="showTask" style="display:none">
+	<form id="form5">         
+	  <fieldset>
+	  	 <label for="text_field"><div class="i_users_2" style="background-position: 0px -4px; padding-left: 25px; background-repeat: no-repeat;" id="task_label_icon">Встреча</div></label>   
+	    <section>
+	      <label for="text_field">Объект</label>               
+	      <div>
+	        <span style="font-size: 20px; line-height: 24px;" class="task_text_type">{task_text_type}</span>
+	        <span style="font-size: 20px; line-height: 24px;"> → </span>
+	        <span class="task_object_name" style="font-size: 20px; line-height: 24px; cursor:pointer; border-bottom:dashed 1px;">{task_object_name}</span>
+	      </div>             
+	    </section>
+	    <section>
+	      <label for="text_field">Исполнитель</label>               
+	      <div>
+	        <select id="task-responsible">
+			   {foreach from=$myUsers as=item}
+			    <option value="{$item.id}">{$item.name}</option>
+			   {/foreach}
+			</select>
+	      </div>             
+	    </section>
+	    <section>
+	      <label for="text_field">Дата</label>               
+	      <div>
+	        <input id="task-date" name="contact-newTaskDate" type="text" class="date" value="">
+			<input id="task-time" style="width:46px;" type="text" data-step="15" value="" class="time" data-connect="task-date">
+	      </div>             
+	    </section>
+	    <section>
+	      <label for="text_field">Статус</label>               
+	      <div>
+	        <select id="task-status">
+			   {foreach from=$task_statuses as=item}
+			    <option value="{$item.id}">{$item.name}</option>
+			   {/foreach}
+			</select>
+	      </div>             
+	    </section>
+	    <section>
+	      <label for="text_field">Коментарий</label>               
+	      <div>
+	        <textarea style="height:100px;" class="comment"></textarea>
+	      </div>             
+	    </section>
+	 	<section>
+	 		<label for="text_field">Действия</label>     
+	 		<div>
+	 			<button class="icon small green i_tick" onclick="$('#task-status').sel('select', '2'); $('#task-SaveButton').click();">Завершить</button>
+	    		<button class="icon small pink i_access_denied" onclick="$('#task-status').sel('select', '3'); $('#task-SaveButton').click();">Отменить</button>
+	    		<button class="icon small blue i_refresh_3" onclick="$('#task-status').sel('select', '1'); $('#task-SaveButton').click();">Открыть заново</button>
+	 		</div>          
+	    </section>
+	  </fieldset>
+	 <fieldset>
+	    	<button onclick="$('#showTask').dialog('destroy');" style="float:right;">Закрыть</button>
+	    	<button id="task-SaveButton" class="save" style="float:right;">Сохранить</button>
+	    	<button id="task-DeleteButton" class="delete red icon i_trashcan" style="float:left; display:none">Удалить</button>
+	  </fieldset>
+	</form>
+</div>

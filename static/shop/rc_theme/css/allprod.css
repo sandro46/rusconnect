@@ -1,0 +1,11 @@
+table {
+	width: 90%;
+}
+table td.img {width: 64px;}
+table td.id {width: 64px;}
+table td {
+	border: solid #000 1px;
+	font-size: 16px;
+	text-align: left;
+	padding-left: 25px;
+}

@@ -1,0 +1,99 @@
+<link type="text/css" href="{$static}css/jquery.fullcalendar.css" rel="stylesheet" />
+<div style="margin-bottom: 50px"><h2 style="float:left;margin-right: 24px;">CRM &ndash; Календарнь менеджера</h2></div>
+<ul class="gridFilters bg01">
+  <li class="title">Менеджер</li>
+  <li class="filter">
+    <select id="filter-status" onchange="goto('/ru/crm/scheduler/manager_id/'+this.value+'/')">
+      {foreach from=$myUsers as=item}
+        <option value="{$item.id}" {if $current_manager == $item.id}selected="selected"{/if}>{$item.name}</option>
+      {/foreach}
+    </select>
+  </li>
+</ul>
+
+<br style="clear:both">
+<div id='calendar'></div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    var date = new Date();var d = date.getDate();var m = date.getMonth();var y = date.getFullYear();
+    $('#calendar').fullCalendar({
+      theme: true,
+      header: {left: 'prev,next today',center: 'title',right: 'month,agendaWeek,agendaDay'},
+      editable: true,
+      allDayDefault:true,
+      dayClick: schedule_add_task,
+      eventClick: schedule_show_task,
+      eventResizeStop: schedule_move_task,
+      eventDragStop: schedule_move_task,
+      minTime:0,
+      maxTime:24,
+      events: [
+         {foreach from=$task as=item}
+	         {title: "{$item.type_name} - {$item.event_name} - {$item.comment}",id:{$item.id},start: new Date({$item.start_date_y}, parseInt('{$item.start_date_m}')-1, parseInt('{$item.start_date_d}'), parseInt('{$item.start_date_h}'), parseInt('{$item.start_date_i}')), end: new Date({$item.end_date_y}, parseInt('{$item.end_date_m}')-1, parseInt('{$item.end_date_d}'), parseInt('{$item.end_date_h}'), parseInt('{$item.end_date_i}')),allDay: false, color:'#A8F0F0'},
+	     {/foreach}
+      ]});
+   $('#calendar').fullCalendar('changeView', 'agendaDay');  
+});
+</script>
+
+<style type="text/css">
+.p_icon {
+	background-position: 1px -4px;
+    background-repeat: no-repeat;
+	padding-left: 27px;
+	margin-bottom: 8px;
+}
+.commentText { border-left: 2px solid gray; padding-left: 8px; }
+#uniform-newTaskResponse { position: absolute; }
+span.stronged {
+	font-weight: bold;
+}
+</style>
+
+<div id="taskSmallDialog" style="display:none" class="widget" >
+	<p class="buttonRadio" check-class="yellow" style="margin-left:10px; margin-top:10px" id="contact-NewTask">
+		<button value="1" style="float:left; margin-right:10px" checked="checked" class="i_phone_2 icon small">Звонок</button>
+		<button value="2" style="float:left; margin-right:10px" class="i_mail icon small">Email</button>
+		<button value="3" style="float:left; margin-right:10px" class="i_admin_user icon small">Встреча</button>
+		<br style="clear:both">
+	</p>
+	<form>   
+		<p style="margin-left:10px;">
+			Дата: 
+			<input id="contact-newTaskDate" name="contact-newTaskDate" type="text" class="date" data-value="now">
+			<input id="contact-newTaskTime" style="width:46px;" type="text" data-step="15" data-value="now" class="time" data-connect="contact-newTaskDate">
+			Ответственный: 
+			<select id="newTaskResponse">
+				{foreach from=$myUsers as=item}
+					<option value="{$item.id}">{$item.name}</option>
+				{/foreach}
+			</select>
+		</p>   
+		<p style="margin-left:10px;  margin-bottom:5px">Комментарий:</p>
+		<textarea style="margin-top: 0px; margin-left: 6px; height: 70px; width: 479px;" class="uniform"></textarea>
+		<fieldset>
+			<button style="float:right;" onclick="$('#taskSmallDialog').dialog('destroy');">Отменить</button>
+	   		<button style="float:right;" class="save" >Сохранить</button>
+		</fieldset>
+	</form>
+</div>
+
+<script type="text/template" id="contactTask">
+<div style="padding-top: 5px;" class="widget" type="task">
+	<span class="icon {icon}" style="background-repeat: no-repeat; padding-left: 24px; background-position: -3px -4px;">{text_type} {date} в {time} контакт: <b>{contact}</b></span><br>
+	<span style="padding-left: 24px;">Создал: <b>{username}</b> Ответственный: <b>{response_name}</b></span>
+	<p class="commentText">{text}</p>
+	<a href="#" class="doneEventButton" style="display:none" onclick="doneEvent({id})">Завершить</a>
+	<a href="#" class="cancelEventButton" style="display:none" onclick="doneEvent({id})">Отменить</a>
+	<a href="#" class="moveEventButton" style="display:none" onclick="doneEvent({id})">Перенести</a>
+	<a href="#" class="deleteEventButton" onclick="$(this).parent().remove()">Удалить</a>
+	<ul style="display:none">
+		<li class="type">{type}</li>
+		<li class="date">{date}</li>
+		<li class="time">{time}</li>
+		<li class="response">{response}</li>
+		<li class="text">{text}</li>
+	</ul>
+</div>
+</script>

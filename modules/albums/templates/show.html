@@ -1,0 +1,44 @@
+{if $curent_page == 'genres'}
+<h1>{$genre_title}</h1>
+<h2>На этом сайте вы можете ознакомится с музыкой в стиле {$genre}. Вы можете скачать с нашего torrent трекера музыку {$genre} а также слушать online лучшие композиции {$genre}.</h2>
+{/if}
+{if $albums}
+{foreach from=$albums as=item}
+<div class="item">
+  <div class="title"><a href="/{$item.rewrite}">{$item.title}</a></div>
+  <div class="subtitle"><b>Дата:</b> {$item.date} &nbsp;&nbsp;<b>Раздел:</b> <a href="{$item.genres.0.rewrite_id}">{$item.genres.0.name}</a> &nbsp;&nbsp;<b>Автор:</b> <a href="/ru/profile/{$item.creatorName}/">{$item.creatorName}</a></div>     
+  <div class="body">
+    <img src="{$item.cover}" class="cover" width="200" height="200">
+    <div class="tracklist">
+    <div class="clear">&nbsp;</div>  
+      Треклист:
+      <ul>
+        {foreach from=$item.tracks as=file}
+        <li>{if $file.cnt}{$file.cnt} - {/if}{$file.name}</li>
+        {/foreach}
+        <li>&nbsp;</li>
+        <li><b>Скачали:</b> {$item.counter} человек</li>
+        <li><b>Размер:</b> {$item.size}</li>
+      </ul>
+    </div>             
+    <br style="clear:both">
+    <div class="foot">
+      <div class="stars">
+        {if $item.rating >= 1}<img src="/templates/img/star_active.jpg">{else}<img src="/templates/img/star_no_active.jpg">{/if}
+        {if $item.rating >= 2}<img src="/templates/img/star_active.jpg">{else}<img src="/templates/img/star_no_active.jpg">{/if}
+        {if $item.rating >= 3}<img src="/templates/img/star_active.jpg">{else}<img src="/templates/img/star_no_active.jpg">{/if}
+        {if $item.rating >= 4}<img src="/templates/img/star_active.jpg">{else}<img src="/templates/img/star_no_active.jpg">{/if}
+        {if $item.rating == 5}<img src="/templates/img/star_active.jpg">{else}<img src="/templates/img/star_no_active.jpg">{/if}
+      </div>
+      <div class="orange_button">Добавить в закладки</div>
+      <div class="more"><a href="#">Коментарии <b style="font-size:10px">({$item.comments_count})</b></a>&nbsp;&nbsp;<a href="/{$item.rewrite}">Подробнее</a></div>
+      <br style="clear:both">
+    </div>
+  </div>
+</div>
+{/foreach}
+<br>
+{$pagenav}
+{else}
+<noindex><div style="margin-left:24px; margin-top:20px;">Тут пусто. но это не на долго :)</div></noindex>
+{/if}

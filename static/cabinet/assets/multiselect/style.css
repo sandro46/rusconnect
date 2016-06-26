@@ -1,0 +1,166 @@
+div.comboselectbox div.combowrap{
+	border-color:#FFFFFF #E7E7E7 #CCCCCC #E7E7E7;
+	/*background-image:url(images/paper_02.png);*/
+	-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.5);
+	box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+div.comboselectbox ul.comboselect li{
+	border-color:#FFFFFF #E7E7E7 #CCCCCC #E7E7E7;
+	background-color:#f6f6f6;
+}
+div.comboselectbox ul.comboselect li:hover a{
+	color:#111;
+}
+div.comboselectbox ul.comboselect li a.add{
+	/*background-image:url(../images/icons/dark/plus.png);*/
+}
+div.comboselectbox ul.comboselect li a.remove{
+	/*background-image:url(../images/icons/dark/cross.png);*/
+}
+div.comboselectbox ul.comboselect li.used a{
+	color:#ccc;
+}
+div.comboselectbox ul.comboselect li.selected{
+	background-color:#efefef;
+}
+div.comboselectbox div.comboselectbuttons a.add{
+	/*background-image:url(../images/icons/dark/triangle_right.png);*/
+}
+div.comboselectbox div.comboselectbuttons a.remove{
+	/*background-image:url(../images/icons/dark/triangle_left.png);*/
+}
+div.comboselectbox div.comboselectbuttons a.addall{
+	/*background-image:url(../images/icons/dark/triangle_double_right.png);*/
+}
+div.comboselectbox div.comboselectbuttons a.removeall{
+	/*background-image:url(../images/icons/dark/triangle_double_left.png);*/
+}
+
+@media screen and (max-width:700px){
+	div.comboselectbox div.comboselectbuttons a.add{
+		/*background-image:url(../images/icons/dark/triangle_down.png);*/
+	}
+	div.comboselectbox div.comboselectbuttons a.remove{
+		/*background-image:url(../images/icons/dark/triangle_up.png);*/
+	}
+	div.comboselectbox div.comboselectbuttons a.addall{
+		/*background-image:url(../images/icons/dark/triangle_double_down.png);*/
+	}
+	div.comboselectbox div.comboselectbuttons a.removeall{
+		/*background-image:url(../images/icons/dark/triangle_double_up.png);*/
+	}
+}
+
+
+div.comboselectbox{
+	display:block;
+	clear:both;
+	min-height:100px;
+}
+div.comboselectbox div.combowrap{
+	-webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px;
+	float:left;
+	border:1px solid;
+	-webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px;
+	max-width:42%;
+	width:200px;
+	height:99%;
+	padding:1% 1% 0 0;
+}
+div.comboselectbox ul.comboselect{
+	overflow:auto;
+	height:99%;
+}
+div.comboselectbox.searchable div.combowrap:first-child ul.comboselect{
+	height:79%;
+}
+div.comboselectbox.searchable div.combowrap:first-child input{
+	margin:1% 2% 2% 2%;
+	width:96%;
+}
+div.comboselectbox ul.comboselect li{
+	display:block;
+	margin:0;
+	list-style-type:none;
+	float:left;
+	border:1px solid;
+	margin:1px 6% 1px 2%;
+	width:92%;
+	-webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px;
+}
+div.comboselectbox ul.comboselect li.hidden{
+	display:none;
+}
+div.comboselectbox ul.comboselect li a{
+	font-size:11px;
+	padding:3px;
+	float:left;
+	width:75%;
+	cursor:pointer;
+	text-decoration:none;
+	cursor:pointer;
+}
+div.comboselectbox ul.comboselect.ui-sortable li.selected a{
+	cursor:n-resize;
+}
+div.comboselectbox ul.comboselect li a.add, div.comboselectbox ul.comboselect li a.remove{
+	float:right;
+	display:block;
+	width:18px;
+	height:18px;
+	/*text-indent:-9999px;*/
+	font-size:14px;
+	background-position:center center;
+	background-repeat:no-repeat;
+	cursor:pointer;
+}
+div.comboselectbox ul.comboselect li.used a{
+	text-decoration:line-through;
+}
+div.comboselectbox ul.comboselect li.selected{
+}
+div.comboselectbox div.comboselectbuttons{
+	max-width:9%;
+	height:99%;
+	width:30px;
+	float:left;
+	padding:0 3px;
+}
+div.comboselectbox div.comboselectbuttons a{
+	padding:3px;
+	line-height:20px;
+	/*font-size:20px;*/
+	width:18px;
+	height:18px;
+	margin:0 2px;
+	/*background-position:center center;
+	background-repeat:no-repeat;*/
+	display:inline-block;
+}
+div.comboselectbox div.comboselectbuttons a.add{
+}
+div.comboselectbox div.comboselectbuttons a.remove{
+}
+div.comboselectbox div.comboselectbuttons a.addall{
+}
+div.comboselectbox div.comboselectbuttons a.removeall{
+}
+
+@media screen and (max-width:700px){
+	div.comboselectbox div.combowrap{
+		max-width:98%;
+		width:98%;
+		height:40%;
+		float:none;
+	}
+	div.comboselectbox.searchable div.combowrap:first-child ul.comboselect{
+		height:40%;
+	}
+	div.comboselectbox div.comboselectbuttons{
+		text-align:center;
+		max-width:98%;
+		width:98%;
+		float:none;
+		height:30px;
+	}

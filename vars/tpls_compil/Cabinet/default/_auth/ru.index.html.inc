@@ -1,0 +1,89 @@
+<? $this->md5_compil='391184a5ab1fc2d10c24085b1255a436'; ?>
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="ru" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="ru" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="ru"> <!--<![endif]-->
+
+<head>
+  <meta charset="utf-8" />
+  <title>Login page</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <link href="/templates/auth/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/templates/auth/css/font-awesome.css" rel="stylesheet" />
+  <link href="/templates/auth/css/auth.css" rel="stylesheet" />  
+  <script type="text/javascript" src="/templates/auth/jquery-1.8.3.min.js"></script>
+</head>
+<body id="login-body">
+
+  <div id="login">
+    <form id="loginform" class="form-vertical no-padding no-margin" method="post" action="<?php if (isset($this->vars['change_auth_url']) && $this->vars['change_auth_url']  ): ?>http://<?php if(isset($this->vars['change_auth_url'])) echo $this->vars['change_auth_url']; ?><?php endif; ?>/ru/-utils/login/">
+      <div class="lock">
+          <i class="icon-lock"></i>
+      </div>
+      <div class="control-wrap">
+          <h4>Авторизация</h4>
+          
+          <?php if (isset($this->vars['auth_message']) && $this->vars['auth_message']  ): ?>
+          <div class="alert alert-error">
+		    <button class="close" data-dismiss="alert">×</button>
+		    <strong>Ошибка!</strong><br>
+		    <?php if(isset($this->vars['auth_message'])) echo $this->vars['auth_message']; ?>
+		  </div>
+          
+          <?php endif; ?>
+          
+          <div class="control-group">
+              <div class="controls">
+                  <div class="input-prepend">
+                      <span class="add-on"><i class="icon-user"></i></span>
+                      <input id="input-username" type="text" name="SL" placeholder="Логин" />
+                  </div>
+              </div>
+          </div>
+          <div class="control-group">
+              <div class="controls">
+                  <div class="input-prepend">
+                      <span class="add-on"><i class="icon-key"></i></span><input name="SP" id="input-password" type="password" placeholder="Пароль" />
+                  </div>
+                  <div class="mtop10">
+                      <div class="block-hint pull-left ">
+                          <input type="checkbox" id=""> Запомнить меня
+                      </div>
+                      <div class="block-hint pull-right">
+                          <a href="javascript:;" class="" id="forget-password">Забыли пароль?</a>
+                      </div>
+                  </div>
+
+                  <div class="clearfix space5"></div>
+              </div>
+
+          </div>
+      </div>
+      
+      <?php if (isset($this->vars['majax']) && $this->vars['majax']  ): ?><input type="hidden" name="SMX" value="1"><?php endif; ?>
+
+      <input type="submit" id="login-btn" class="btn btn-block login-btn" value="Login" />
+    </form>
+
+    <form id="forgotform" class="form-vertical no-padding no-margin hide" action="index.html">
+      <p class="center">Enter your e-mail address below to reset your password.</p>
+      <div class="control-group">
+        <div class="controls">
+          <div class="input-prepend">
+            <span class="add-on"><i class="icon-envelope"></i></span><input id="input-email" type="text" placeholder="Email"  />
+          </div>
+        </div>
+        <div class="space20"></div>
+      </div>
+      <input type="button" id="forget-btn" class="btn btn-block login-btn" value="Submit" />
+    </form>
+  </div>
+
+  <div id="login-copyright">
+      2013 © itbc llc.
+  </div>
+
+  
+ 
+</body>
+</html>

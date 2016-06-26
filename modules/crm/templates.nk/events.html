@@ -1,0 +1,43 @@
+<div style="margin-bottom: 50px">
+  <h2 style="float:left;margin-right: 24px;">CRM &ndash; События</h2> 
+</div>
+
+<ul class="gridFilters bg01">
+  <li class="title">Тип события</li>
+  <li class="filter">
+    <select id="filter-status" onchange="if(this.value  != 0) { grid.events.addFilter('type_id', this.value).start(); } else  { grid.events.removeFilter('type_id').start();}">
+      <option value="0" selected="selected">Любой</option>
+      {foreach from=$eventTypes as=item}
+        <option value="{$item.id}">{$item.name}</option>
+      {/foreach}
+    </select>
+  </li>
+  
+  <li class="title ml-s">Инициатор</li>
+  <li class="filter">
+    <select id="filter-status" onchange="if(this.value  != 0) { grid.events.addFilter('user_id', this.value).start(); } else  { grid.events.removeFilter('user_id').start();}">
+      <option value="0" selected="selected">Любой</option>
+      {foreach from=$myUsers as=item}
+        <option value="{$item.id}">{$item.name}</option>
+      {/foreach}
+    </select>
+  </li>
+</ul>
+<br style="clear:both">
+
+
+{supergrid name=events tpl=grid.defaul.html class=crm_client method=getEvents}
+  cols : [
+    {name : "date", title:"Дата", align:"center", search:true, sort:true, sorted:true,sort_type:"desc"},
+    {name : "user_name", title:"Инициатор", align:"center", search:true, sort:true},
+    {name : "type_name", title:"Событие", align:"center", search:true, sort:true},
+    {name : "company", title:"Компания", align:"center", search:true, sort:true},
+    {name : "contact", title:"Контакт", align:"center", search:true, sort:true},
+    {name : "deal", title:"Сделка", align:"center", search:true, sort:true}
+ ],
+ 
+ autoload:true,
+ view : "list",
+ class:["odd","even"],
+ limit : 20
+{/grid}

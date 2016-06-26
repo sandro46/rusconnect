@@ -1,0 +1,247 @@
+<style type="text/css">
+.tabIcon {
+	background-position: 1px 2px;
+    background-repeat: no-repeat;
+    
+}
+.tabContent {
+	padding: 20px 9px 2px 9px;
+}
+
+.p_icon {
+	background-position: 1px -4px;
+    background-repeat: no-repeat;
+	padding-left: 27px;
+	margin-bottom: 8px;
+}
+#DialogContactTabs {
+	padding:5px; background-color: #FFFFFF;
+	
+}
+.commentText { border-left: 2px solid gray; padding-left: 8px; }
+#uniform-newTaskResponse { position: absolute; }
+span.stronged {
+	font-weight: bold;
+	
+}
+</style>
+
+<div id="contactDialog" style="display:none">
+	<div class="bg09 ui-corner-all" id="DialogContactTabs">
+		<div class="tab">
+			<ul>
+				<li><a style="padding-left: 24px;" href="#tabs-1" class="icon tabIcon i_user">ФИО, Компания</a></li>
+				<li><a style="padding-left: 24px;" href="#tabs-2" class="icon tabIcon i_phone_2">Контакты</a></li>
+				<li><a style="padding-left: 24px;" href="#tabs-3" class="icon tabIcon i_speech_bubbles_2">События, примечания</a></li>
+				<li><a style="padding-left: 24px;" href="#tabs-4" class="icon tabIcon i_list_image">Анкета</a></li>
+			</ul>
+			<div id="tabs-1">
+				<div class="tabContent">
+					<div style="margin-bottom:8px;">
+						<h3 style="float: left; margin-right: 25px;">ФИО</h3>
+						<input type="text" style="width: 612px;" id="contact-fio">
+						<br style="clear:both">
+					</div>
+					<div style="margin-bottom:6px;">
+						<table cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:0px;">
+							<tr>
+								<td width="50%"><b>Компания</b></td>
+								<td><b>Должность</b></td>
+							</tr>
+							<tr>
+								<td><input type="text" id="contact-company" instance="companies" /></td>
+								<td><input type="text" id="contact-post"/></td>
+							</tr>
+						</table>
+					</div>
+					<div style="margin-bottom:6px;">
+						<table cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:0px;">
+							<tr>
+								<td width="50%"><b>Источник</b></td>
+								<td><b>Ответственный</b></td>
+							</tr>
+							<tr>
+								<td>
+									<select id="contact-source">
+									{foreach from=$sources as=item}
+									<option value="{$item.id}">{$item.name}</option>
+									{/foreach}
+									</select>
+								</td>
+								<td>
+									<select id="contact-response">
+									{foreach from=$myUsers as=item}
+									<option value="{$item.id}">{$item.name}</option>
+									{/foreach}
+									</select>
+								</td>
+							</tr>
+						</table>
+					</div>
+					
+					<div style="margin-bottom:6px; display:none">
+						<h5>Добавил: <a href="#">{$SysUser.name}</a></h5><h5>Дата добавления: <b>20 Апреля 2012г. в 12:40</b></h5>						
+					</div>
+				</div>
+			</div>
+			<div id="tabs-2">
+				<div class="tabContent">
+					<div style="width:52%; float:left; margin-left:5px; margin-bottom:10px;" >
+						<h4>Телефон</h4>
+						<a href="#" name="phoneAdd" onclick="addContactRow('phoneRowTemplate', this, 'ContactPhoneRow')">Добавить еще телефон</a>
+					</div>
+					<div style="width:47%; float:left; margin-bottom:10px;">
+						<h4>Email</h4>
+						<a href="#" name="emailAdd" onclick="addContactRow('emailRowTemplate', this, 'ContactEmailRow')">Добавить еще email</a>
+					</div>
+					<br style="clear:both">
+				</div>
+			</div>
+			
+			<div id="tabs-3">
+				<div class="tabContent">
+					<div style="height: 280px; overflow: auto;" class="widget" id="contactWidgetComments">
+						
+					</div>
+					<br style="clear:both">
+					<button class="green i_user_comment icon small" style="float:left" onclick="addContactComment()">Добавить примечание</button>
+					<button class="green i_alarm_clock icon small" style="float:left"  onclick="addContactTask()">Добавить задачу</button>
+					<br style="clear:both">
+				</div>
+			</div>
+			<div id="tabs-4">
+				<div class="tabContent">
+					<h4>Анкета с сайта skidki.ncity.biz</h4>
+						
+				
+				
+				</div>
+			</div>
+		</div>
+	</div>
+	 <form>         
+		 <fieldset>
+		    <button onclick="$('#contactDialog').dialog('destroy');" style="float:right;">Закрыть</button>
+		    <button id="contact-SaveButton" class="save" style="float:right;" onclick="saveContact()">Сохранить</button>
+		    <button id="contact-DeleteButton" class="delete red icon i_trashcan" onclick="deleteCompany()" style="float:left; display:none">Удалить</button>
+		 </fieldset>
+  	</form>
+</div>
+
+<script type="text/template" id="phoneRowTemplate">
+<div style="margin-top:10px;" name={name}>
+	<input type="text" style="margin-top: 3px; width: 220px; float:left" name="contact-phone">
+	<select style="float:left" name="contact-phone-type">
+		{foreach from=$ref_phone as=item}<option value="{$item.id}">{$item.name}</option>{/foreach}
+	</select>
+	<br style="clear:both">
+</div>
+</script>
+
+<script type="text/template" id="emailRowTemplate">
+<div style="margin-top:10px;" name="{name}">
+	<input type="text" style="margin-top: 3px; width: 149px; float:left" name="contact-email">
+	<select style="float:left" name="contact-email-type">
+		{foreach from=$ref_email as=item}<option value="{$item.id}">{$item.name}</option>{/foreach}
+	</select>
+	<br style="clear:both">
+</div>
+</script>
+
+<script type="text/template" id="contactComment">
+<div style="padding-top: 5px;" class="widget" type="comment">
+	<span class="icon i_speech_bubble" style="background-repeat: no-repeat; padding-left: 24px; background-position: -3px -4px;">{date} <a href="#">{username}</a></span><br>
+	<p class="commentText">{text}</p>
+	<a href="#" class="editEventButton" onclick="editComment(this)">Изменить</a> 
+	<a href="#" class="deleteEventButton" onclick="$(this).parent().remove()">Удалить</a>
+</div>
+</script>
+
+<script type="text/template" id="contactTask">
+<div style="padding-top: 5px;" class="widget" type="task">
+	<span class="icon {icon}" style="background-repeat: no-repeat; padding-left: 24px; background-position: -3px -4px;">{text_type} {date} в {time} контакт: <b>{contact}</b></span><br>
+	<span style="padding-left: 24px;">Создал: <b>{username}</b> Ответственный: <b>{response_name}</b></span>
+	<p class="commentText">{text}</p>
+	<a href="#" class="doneEventButton" style="display:none" onclick="doneEvent({id})">Завершить</a>
+	<a href="#" class="cancelEventButton" style="display:none" onclick="doneEvent({id})">Отменить</a>
+	<a href="#" class="moveEventButton" style="display:none" onclick="doneEvent({id})">Перенести</a>
+	<a href="#" class="deleteEventButton" onclick="$(this).parent().remove()">Удалить</a>
+	<ul style="display:none">
+		<li class="type">{type}</li>
+		<li class="date">{date}</li>
+		<li class="time">{time}</li>
+		<li class="response">{response}</li>
+		<li class="text">{text}</li>
+	</ul>
+</div>
+</script>
+
+<script type="text/template" id="contactDetailPhoneRow">
+	<p class="icon p_icon i_phone_hook"><span class="stronged">{phone}</span> {name}</p>
+</script>
+
+<script type="text/template" id="contactDetailEmailRow">
+	<p class="icon p_icon i_mail"><span class="stronged">{email}</span> {name}</p>
+</script>
+
+<div id="contactInfoDialog" style="display:none">
+	<form> 
+		<fieldset style="padding:10px;">
+			<p class="icon p_icon i_admin_user" style="font-size:18px;"><span class="contactName">Пупкин Василий Педросович</span></p>
+			<p class="icon p_icon i_house_2" style=""><span class="contactCompany">Пупкин и CO</span> &ndash; <span class="contactPost">Гениальный директор</span></p>
+			<p class="p_icon">Добавил: <span class="stronged addUser">Пупкин Валерий</span> Дата: <span class="stronged addDate">20.04.2012г.</span> Источник: <span class="stronged ContactSource">СМС Реклама</span></p>
+		</fieldset>	
+		<fieldset style="padding:10px; margin-top: 0;" id="contactWidgetContacts">
+
+		</fieldset>	
+		<fieldset style="margin-top: 0;">
+			<div style="height: 280px; overflow: auto;" class="widget" id="contactWidgetComments2">
+						
+			
+			</div>
+		</fieldset>
+		<fieldset>
+			<button style="float:left;" class="red delete">Удалить</button>
+			<button style="float:right;" onclick="$('#contactInfoDialog').dialog('destroy');">Закрыть</button>
+		</fieldset>
+	</form>
+</div>
+
+
+<div id="textareaSmallDialog" style="display:none" class="widget">
+	<form>         
+		<textarea style="height:90px; margin-top:15px; margin-left:6px; width:400px; " class="uniform"></textarea>
+		<fieldset>
+			<button style="float:right;" onclick="$('#textareaSmallDialog').dialog('destroy');">Отменить</button>
+	   		<button style="float:right;" class="save">Сохранить</button>
+		</fieldset>
+	</form>
+</div>
+
+<div id="taskSmallDialog" style="display:none" class="widget" >
+	<p class="buttonRadio" check-class="yellow" style="margin-left:10px; margin-top:10px" id="contact-NewTask">
+		<button value="1" style="float:left; margin-right:10px" checked="checked" class="i_phone_2 icon small">Звонок</button>
+		<button value="2" style="float:left; margin-right:10px" class="i_mail icon small">Email</button>
+		<button value="3" style="float:left; margin-right:10px" class="i_admin_user icon small">Встреча</button>
+		<br style="clear:both">
+	</p>
+	<form>   
+		<p style="margin-left:10px;">
+			Дата: 
+			<input id="contact-newTaskDate" name="contact-newTaskDate" type="text" class="date" data-value="now">
+			<input id="contact-newTaskTime" style="width:46px;" type="text" data-step="15" data-value="now" class="time" data-connect="contact-newTaskDate">
+			Ответственный: 
+			<select id="newTaskResponse">
+				{foreach from=$myUsers as=item}
+					<option value="{$item.id}">{$item.name}</option>
+				{/foreach}
+			</select>
+		</p>   
+		<p style="margin-left:10px;  margin-bottom:5px">Комментарий:</p>
+		<textarea style="margin-top: 0px; margin-left: 6px; height: 70px; width: 479px;" class="uniform"></textarea>
+		<fieldset>
+			<button style="float:right;" onclick="$('#taskSmallDialog').dialog('destroy');">Отменить</button>
+	   		<button style="float:right;" class="save" >Сохранить</button>
+		</fieldset>
+	</form>
+</div>

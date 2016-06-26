@@ -1,0 +1,79 @@
+<div style="margin-bottom: 50px">
+  <h2 style="float:left;margin-right: 24px;">CRM &ndash; Сделки</h2>
+  <button  style="float:left" class="i_plus icon small" onclick="addDeal(false)">Новая сделка</button>
+</div>
+
+<ul class="gridFilters bg01">
+  <li class="title">Статус</li>
+  <li class="filter">
+    <select id="filter-status" onchange="if(this.value  != 0) { grid.deals.addFilter('status_id', this.value).start(); } else  { grid.deals.removeFilter('status_id').start();}">
+      <option value="0" selected="selected">Любой</option>
+      {foreach from=$dealStatuses as=item}
+        <option value="{$item.id}">{$item.name}</option>
+      {/foreach}
+    </select>
+  </li>
+  
+  <li class="title ml-s">Этап</li>
+  <li class="filter">
+    <select id="filter-status" onchange="if(this.value  != 0) { grid.deals.addFilter('phase_id', this.value).start(); } else  { grid.deals.removeFilter('phase_id').start();}">
+      <option value="0" selected="selected">Любой</option>
+      {foreach from=$dealPhases as=item}
+        <option value="{$item.id}">{$item.name}</option>
+      {/foreach}
+    </select>
+  </li>
+  
+  <li class="title ml-s">Ответственный</li>
+  <li class="filter">
+    <select id="filter-status" onchange="if(this.value  != 0) { grid.deals.addFilter('executor_id', this.value).start(); } else  { grid.deals.removeFilter('executor_id').start();}">
+      <option value="0" selected="selected">Любой</option>
+      {foreach from=$myUsers as=item}
+        <option value="{$item.id}">{$item.name}</option>
+      {/foreach}
+    </select>
+  </li>
+  
+</ul>
+<br style="clear:both">
+
+
+{supergrid name=deals tpl=grid.defaul.html class=crm_client method=getDeals}
+  cols : [
+    {name : "date", title:"Дата", align:"center", search:true, sort:true, sorted:true,sort_type:"desc"},
+    {name : "name", title:"Название", align:"center", search:true, sort:true},
+    {name : "phase_name", title:"Этап", align:"center", search:true, sort:true},
+    {name : "status_name", title:"Состояние", align:"center", search:true, sort:true},
+    {name : "responsible_user_name", title:"Ответственный", align:"center", search:true, sort:true},
+    {name : "company_name", title:"Компания", align:"center", search:true, sort:true},
+    {name : "contract_summ", title:"Сумма контракта", align:"center", search:true, sort:true},
+    {name : "contract_name", title:"Договор", align:"center", search:true, sort:true}
+ ],
+ 
+ autoload:true,
+ click: "showDeal({id})",
+ view : "list",
+ class:["odd","even"],
+ limit : 20
+{/grid}
+
+{include company_dialogs.html}
+
+<script type="text/javascript">
+
+var globalCrmPostSaveCompany = function(id, info) {
+
+	 $('#deal-company').val(info.name);
+	 $('input[name="autocomplete-companies-value"]').remove();
+	 $('#deal-company').parent().append('<input type="hidden" name="autocomplete-companies-value" value="'+id+'">');
+	
+	//alert('id: '+id+' name: '+info.name);
+
+	
+}
+
+</script>
+
+{include deals_dialog.html}
+
+

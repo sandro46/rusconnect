@@ -1,0 +1,65 @@
+<h1 style="font-size: 22px;">{$track_name}</h1>
+<h2 style="font-size: 12px;">скачать {$track_name} mp3 {$track_name} torrent скачать {$album_info.title}</h2>
+
+<script type="text/javascript" src="/templates/js/sm.js"></script>  
+<script type="text/javascript" src="/templates/js/base64.js"></script>
+<script type="text/javascript">
+  soundManager.flashVersion = 9;
+  soundManager.useHighPerformance = true; 
+  soundManager.wmode = 'transparent'; 
+  soundManager.useFastPolling = true; 
+  soundManager.url = '/templates/js/';
+  var PP_CONFIG = { autoStart: false, playNext: true, useThrottling: false, usePeakData: true, useWaveformData: false, useEQData: false,useFavIcon: false,useMovieStar: true}
+</script>
+<script type="text/javascript" src="/templates/js/sm2.js"></script>  
+
+<!--  
+<div class="banertop" style="margin-top:10px; margin-bottom:10px; cursor:pointer;  width: 726px; height: 88px; border: solid black 1px; background-color: gray; line-height: 80px; vertical-align: middle; text-align: center; color: white;">Рекламное место</div>
+-->
+
+<br>
+<div class="album_item">
+	<div class="body"  style="background: transparent; height: auto;">
+		<div class="filetracks">
+			<ul class="playlist">
+				<li><a href="{$track_fullpath}">{$track_name}</a></li>
+			</ul>
+			<div class="torrentdownload"><a href="{$track_fullpath}">Скачать</a></div>
+			<div class="torrentdownload"><a href="#">Добавить в плейлист</a></div>
+		</div>	
+	</div>
+</div>
+ <br style="clear:both"><br>
+<!-- album info -->
+<div class="album_item">
+	<div class="title"><a href="/{$album_info.rewrite}">{$album_info.title}</a></div>
+	<div class="body">
+		<img src="http://covers.ultra-music.org/images{$album_cover}" class="cover" width="200" height="200">
+		<div class="tracklist">
+			<ul>
+				<li><b>Год:</b> {$album_info.year}</li>
+				<li><b>Жанр:</b> {foreach from=$album_genres as=item}<a href="#">{$item.name}</a>,{/foreach}</li>
+				<li><b>Композиций:</b> {$album_info.tracks_count}</li>
+				<li><b>Размер файлов:</b> {$album_info.size}</li>
+				<li><b>Скачан:</b> {$album_info.counter} раз</li>
+				<li><b>Добавил:</b> <a href="#">{$album_info.login}</a></li>
+				<li><b>Дата добавления:</b> {$album_info.date}</li>
+				<li class="rating"><div class="stars" style="float:left; width:100px;"><img src="/templates/img/stara.png"><img src="/templates/img/stara.png"><img src="/templates/img/stara.png"><img src="/templates/img/star.png"><img src="/templates/img/star.png"></div> <div style="float:left; width:170px;">(оценка 4,5 / голосов 23541)</div><br style="clear:both"></li>
+			</ul>
+		</div>             
+		<br style="clear:both">
+	</div>
+	<div class="title"><a href="/{$album_info.rewrite}">Другие композиции &mdash; {$album_info.title}</a></div>
+    <div class="filetracks">
+        <ul class="playlist">
+            {foreach from=$album_tracks as=item}
+                     <li><a href="#">{$item.cnt} &ndash; {$item.name}</a></li>
+            {/foreach}
+        </ul>
+        <div class="torrentdownload"><a href="/{$album_info.rewrite}">Перейти к альбому</a></div>
+    </div>
+    <br style="clear:both">
+</div>
+
+
+

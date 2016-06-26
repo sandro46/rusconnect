@@ -1,0 +1,107 @@
+<div class="album_item">
+    
+    <script type="text/javascript" src="/templates/js/sm.js"></script>  
+    <script type="text/javascript" src="/templates/js/base64.js"></script>
+    <script type="text/javascript">
+    
+    soundManager.flashVersion = 9;
+    soundManager.useHighPerformance = true; // keep flash on screen, boost performance
+    soundManager.wmode = 'transparent'; // transparent SWF, if possible
+    soundManager.useFastPolling = true; // increased JS callback frequency
+    soundManager.url = '/templates/js/';
+
+    var PP_CONFIG = {
+              autoStart: false,      // begin playing first sound when page loads
+              playNext: true,        // stop after one sound, or play through list until end
+              useThrottling: false,  // try to rate-limit potentially-expensive calls (eg. dragging position around)</span>
+              usePeakData: true,     // [Flash 9 only] whether or not to show peak data (left/right channel values) - nor noticable on CPU
+              useWaveformData: false,// [Flash 9 only] show raw waveform data - WARNING: LIKELY VERY CPU-HEAVY
+              useEQData: false,      // [Flash 9 only] show EQ (frequency spectrum) data
+              useFavIcon: false,     // try to apply peakData to address bar (Firefox + Opera) - performance note: appears to make Firefox 3 do some temporary, heavy disk access/swapping/garbage collection at first(?) - may be too heavy on CPU
+              useMovieStar: true     // Flash 9.0r115+ only: Support for a subset of MPEG4 formats.
+            }
+
+                
+    </script>
+    <script type="text/javascript" src="/templates/js/sm2.js"></script>  
+    
+    <!-- album info -->
+    <div class="title"><a href="/{$album_info.rewrite}">{$album_info.title}</a></div>
+    <div class="body">
+        <img src="http://covers.ultra-music.org/images{$album_cover}" class="cover" width="200" height="200">
+        <div class="tracklist">
+                <ul>
+                    <li><b>Год:</b> {$album_info.year}</li>
+                    <li><b>Жанр:</b> {foreach from=$album_genres as=item}<a href="#">{$item.name}</a>,{/foreach}</li>
+                    <li><b>Композиций:</b> {$album_info.tracks_count}</li>
+                    <li><b>Размер файлов:</b> {$album_info.size}</li>
+                    <li><b>Скачан:</b> {$album_info.counter} раз</li>
+                    <li><b>Добавил:</b> <a href="#">{$album_info.login}</a></li>
+                    <li><b>Дата добавления:</b> {$album_info.date}</li>
+                    <li class="rating"><div class="stars" style="float:left; width:100px;"><img src="/templates/img/stara.png"><img src="/templates/img/stara.png"><img src="/templates/img/stara.png"><img src="/templates/img/star.png"><img src="/templates/img/star.png"></div> <div style="float:left; width:170px;">(оценка 4,5 / голосов 23541)</div><br style="clear:both"></li>
+                </ul>
+        </div>             
+        <br style="clear:both">
+    </div>
+    <br style="clear:both">
+    <!-- /album info -->
+    <!-- compositions -->
+    <div class="title"><a href="/{$album_info.rewrite}">{$album_info.title} - Все композиции</a></div>
+    <div class="filetracks">
+        <!--
+        <ul class="help">
+            <li class="icon down"><a href="#">Скачать</a></li>
+            <li class="icon play"><a href="#">Слушать</a></li>
+            <li class="icon addplay"><a href="#">Добавить в плейлист</a></li>
+        </ul>
+        <br style="clear:both">
+         -->
+        <ul class="playlist">
+            {foreach from=$album_tracks as=item}
+                     <li>
+                         <a href="{$item.filename}">{$item.cnt} &ndash; {$item.name}</a>
+                        {if $SystemUser.id}
+                            <div class="icon_custom down" onMouseMove="this.className='downa'" onMouseOut="this.className='down'"></div>
+                            <div class="icon_custom add" onMouseMove="this.className='adda'" onMouseOut="this.className='add'"></div>
+                        {else}
+                               <div class="download"><a href="{$album_info.rewrite}/composition/{$item.id}" onclick="evt = event || window.event; evt.cancelBubble = true;">Скачать</a></div>
+                        {/if}
+                     </li>
+            {/foreach}
+        </ul>
+        <div class="torrentdownload"><a href="{$torrents_path}{$album_info.torrent}">Скачать торрент</a></div>
+        <div class="torrentdownload" onclick="alert('Временно недоступно');">Скачать тархивом</div>
+    </div>
+    <br style="clear:both"><br>
+    <!-- /compositions -->
+    <!-- comments -->
+        
+        <div id="CommentsBlock">
+            {if $album_comments}
+            {foreach from=$album_comments as=comment}
+                <div class="title" style="margin-top:10px;"><a href="#{$comment.user_id}">{$comment.login}</a><div style="float:right; font-size:12px;">{$comment.ctime} ({$comment.cdate})</div></div>
+                   <div class="comment_item">
+                    <img src="http://covers.ultra-music.org/images/img_2a28eb7cda6909088d605c64fad55c7d.jpg" class="comment_cover" width="100" height="100">
+                    <div class="comment_body">
+                          {$comment.comment}
+                    </div>             
+                    <br style="clear:both">
+                </div>
+            {/foreach}
+            {else}
+                <h2>Пока никто не оставлял комментарии.</h2>
+            {/if}
+        </div>
+        
+        <script type="text/template" id="albumCommentTemplate"><div class="title" style="margin-top:10px;"><a href="#{userid}">{username}</a><div style="float:right; font-size:12px;">{time} ({date})</div></div><div class="comment_item"><img src="http://covers.ultra-music.org/images/{userpic}" class="comment_cover" width="100" height="100"><div class="comment_body">{text}</div><br style="clear:both"></div></script>
+     
+            <br>
+    <!--/comments-->                
+    <!-- comments form -->
+    <br>
+    <div class="editor">
+        <textarea id="commentBlock" style="width:660px; height:108px; background:#FFF; border-width:0px; margin-top:26px; margin-left:18px; color:#738b01; padding:4px;" onBlur="this.value = (this.value == '')? 'Оставь свой комментарий' : this.value" onFocus="this.value = (this.value == 'Оставь свой комментарий')? '' : this.value;">Оставь свой комментарий</textarea>
+      <div class="post_comment" {if $SystemUser.id} onclick="AlbumCommentPost({$album_info.id});"{/if}>Оставить комментарий</div> {if $SystemUser.id}{else}<div style="margin-top:-21px; margin-left:153px; font-size:15px">&mdash; Комментарии могут оставлять только зарегистрированые пользователи.</div>{/if}
+    </div>
+    <!-- /comments form -->
+</div>

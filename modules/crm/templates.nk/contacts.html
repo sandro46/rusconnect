@@ -1,0 +1,42 @@
+<div style="margin-bottom: 50px">
+  <h2 style="float:left;margin-right: 24px;">CRM &ndash; Контакты</h2> 
+  <button  style="float:left" class="i_plus icon small" onclick="addContact(false)">Добавить контакт</button>
+</div>
+
+<ul class="gridFilters bg01">
+  <li class="title">ФИО</li>
+  <li class="filter" style="margin-top:-5px;"><input style="position:relative; z-index:99; width:100px" type="text" class="grid-find-input" filter="contact_name" grid="contacts" value=""></li>
+  <li class="title ml-s">Компания</li>
+  <li class="filter" style="margin-top:-5px;"><input style="position:relative; z-index:99; width:100px" class="grid-find-input" type="text" filter="company" grid="contacts" value=""></li>
+  <li class="title ml">Источник</li>
+  <li class="filter">
+    <select id="filter-status" onchange="if(this.value  != 0) { grid.contacts.addFilter('sourceId', this.value).start(); } else  { grid.contacts.removeFilter('sourceId').start();}">
+      <option value="0" selected="selected">Любой</option>
+      {foreach from=$sources as=item}
+        <option value="{$item.id}">{$item.name}</option>
+      {/foreach}
+    </select>
+  </li>
+</ul>
+<br style="clear:both">
+
+
+{supergrid name=contacts tpl=grid.defaul.html class=crm_client method=getContacts}
+  cols : [
+    {name : "contact_name", title:"ФИО", align:"center", search:true, sort:true},
+    {name : "company_name", title:"Компания", align:"center", search:true, sort:true},
+    {name : "post", title:"Должность", align:"center", search:true, sort:true},
+    {name : "source_name", title:"Источник", align:"center", search:true, sort:true},
+    {name : "responsible_user_name", title:"Ответственный", align:"center", search:true, sort:true},
+    {name : "date", title:"Дата добавления", align:"center", search:true, sort:true},
+    {name : "create_user_name", title:"Кто добавил", align:"center", search:true, sort:true}
+ ],
+ 
+ autoload:true,
+ click:"showContact({id})",
+ view : "list",
+ class:["odd","even"],
+ limit : 20
+{/grid}
+{include contact_dialog.html}
+

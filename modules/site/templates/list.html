@@ -1,0 +1,475 @@
+<script type="text/javascript" src="{$static}js/modules.sites.js"></script>
+<script type="text/javascript" src="{$static}js/uploader.js"></script>
+<link rel="stylesheet" href="{$static}css/tp.css">
+<link rel="stylesheet" href="{$static}css/sitescontroll.css">
+
+<div id="imageUploaderFromWisywig-Dialog" style="display:none">
+<form><fieldset><label>Загрузка изображения</label>
+<div id="imageUploaderFromWisywig-Window" align="center" class="bg04 ui-corner-all"></div>
+<a style="position: relative; float: right; overflow: hidden; direction: ltr; margin-top: 17px;" onclick="$('#imageUploaderFromWisywig-Dialog').dialog('destroy');" class="btn i_cross icon" href="javascript:void(0)">Закрыть</a>
+</fieldset></form>
+</div>
+
+<div id="iconUploaderFromWisywig-Dialog" style="display:none;">
+<form><fieldset><label>Загрузка изображения</label>
+<div id="iconUploaderFromWisywig-Window" align="center" class="bg04 ui-corner-all" style="padding-top: 15px;float: left;"></div>
+<a style="position: relative; float: right; overflow: hidden; direction: ltr; margin-top: 17px;" onclick="$('#iconUploaderFromWisywig-Dialog').dialog('destroy');" class="btn i_cross icon" href="javascript:void(0)">Закрыть</a>
+</fieldset></form>
+</div>
+
+
+<div style="margin-bottom: 50px">
+  <h2 style="float:left;margin-right: 24px;">Мои сайты</h2>
+  {if $siteExists} {else}
+  <button  style="float:left" class="green i_plus icon small" onclick="siteWizard.open()">Добавить сайт</button>
+  {/if}
+</div>
+<br style="clear:both">
+
+{supergrid name=requests tpl=grid.defaul.html class=sites method=getList}
+  cols : [
+    {name : "id", title:"#", align:"center", sort:true},
+    {name : "name", title:"Название", align:"left", sort:true},   
+    {name : "domain", title:"Домен", align:"left", sort:true},
+    {name : "aliases", title:"Алиасы", align:"left", sorted:true, sort_type:"desc", sort:true},
+    {name : "active", title:"Активный", align:"center", sort:true}
+ ],
+ 
+ autoload:true,
+ view : "list",
+ click : "showSiteSettingForm({id})",
+ class:["odd","even"],
+ limit : 10 
+{/grid}
+
+<div id ="siteReviewDialog" style="display:none">
+	<form>         
+	<input type="hidden" id="curReviewId" name="ed-shopName" value="">
+    	<fieldset>
+        	<section>
+          		<label for="text_field">Заголовок</label>               
+          		<div><input type="text" id="reviewTitle" name="ed-shopName" value=""></div>             
+        	</section>
+        	<section>
+           		<label for="text_field">Текст</label>               
+           		<div>
+           			<textarea id="reviewText" rows="" cols=""></textarea>
+           		</div>             
+         	</section>
+		</fieldset>
+		<button style="float:right" onclick="$('#siteReviewDialog').dialog('destroy');">Отмена</button>
+		<button style="float:right" onclick="saveReview();">Сохранить</button>
+		<br style="clear:both;">
+	</form>
+</div>
+<div id ="shopSettingDialog" style="display:none">
+ 	<div class="tab">
+	    <ul>
+	      <li><a href="#tabs-1">Магазин</a></li>
+	      <li><a href="#tabs-2">Интеграция</a></li>
+	      <li><a href="#tabs-3">Доставка и оплата</a></li>
+	      <li><a href="#tabs-4">Продление услуг</a></li>
+	      <li><a href="#tabs-5">Модули сайта</a></li>
+	      <li><a href="#tabs-6">Соц. сети</a></li>
+	      
+	    </ul>
+	   	<div id="tabs-1">
+	      <form id="form541">         
+	        <fieldset>
+	          <section>
+	            <label for="text_field">Название магазина</label>               
+	            <div><input type="text" id="ed-shopName" name="ed-shopName" value=""></div>             
+	          </section>
+	          <section>
+	             <label for="text_field">Домены</label>               
+	             <div>
+	             	<table  cellpadding="0" cellspacing="0">
+		             	<thead>
+		             		<tr>
+		            			<th>Основной</th>
+		            			<th>Адрес</th>
+		            			<th>Порт</th>
+		            		</tr>
+		             	</thead>
+		             	<tbody id="mySiteList">
+		             		
+		             	</tbody>
+	             	</table>
+	             	<button class="i_plus icon smal green" id="ed-regDomain" onclick="showRegDomainForm()">Зарегистрировать еще домен</button>
+	             </div>             
+	           </section>
+	          <section>
+	             <label for="text_field">Контактный телефон</label>               
+	             <div>
+	               <input type="text" id="ed-contactPhone" name="ed-contactPhone" value="">
+	             </div>             
+	           </section>
+	          <section>
+	             <label for="text_field">Контактный email</label>               
+	             <div>
+	               <input type="text" id="ed-contactemail" name="ed-contactemail" value="">
+	             </div>             
+	           </section>
+	          <section>
+	             <label for="text_field">Логотип</label>               
+	             <div>
+	               <img src="/vars/files/images/no-image.png" style="width:100px" class="logoimage">
+	               <a class="logoimage_link" href="javascript:void(0)">Изменить</a>
+	             </div>             
+	           </section>
+	           <section>
+	             <label for="text_field">Favicon</label>               
+	             <div>
+	               <img src="/vars/files/images/no-image.png" style="width:32px; height:32px" class="iconimage">
+	               <a class="iconimage_link" href="javascript:void(0)">Изменить</a>
+	             </div>             
+	           </section>
+	        </fieldset>
+	      </form>
+	    </div>
+	    <div id="tabs-2">
+	      <form id="form543">         
+	        <fieldset>
+	          <section>
+	            <label for="text_field">Yandex Метрика</label>               
+	            <div>
+	            	<input type="text" id="ed-YM" name="ed-YM" value=""><br>
+	            	<span>Укажите номер счетчика</span>
+	            </div>             
+	          </section>
+	          <section>
+	             <label for="text_field">Google Analytics</label>       
+	             <div>        
+					<input type="text" id="ed-google" name="ed-google" value=""><br>
+	            	<span>Укажите идентификатор отслеживания</span>
+	             </div>             
+	           </section>
+	          	<section>
+	             <label for="text_field">Unisender</label>               
+	             <div>        
+					<input type="text" id="ed-unisender" name="ed-unisender" value=""><br>
+	            	<span>Укажите идентификатор списка рассылки</span>
+	             </div>           
+	           </section>
+	        </fieldset>
+	      </form>
+	    </div>
+		<div id="tabs-3">
+	      <form id="form549">         
+	        <fieldset>
+	          <section>
+	            <label for="text_field">Возможные способы доставки</label>               
+	            <div id="deliverTypes">
+	            	<input class="noUniform" id="deliverType2" type="checkbox">Курьер<br>
+	            	<input class="noUniform" id="deliverType1" type="checkbox">Самовывоз<br>
+	            	<input class="noUniform" id="deliverType3" type="checkbox">Служба доставки
+	            	
+	            </div>             
+	          </section>
+	          <section>
+	             <label for="text_field">Возможные способы оплаты</label>       
+	             <div id="payTypes">        
+	             	<input class="noUniform" id="payType2" type="checkbox">Наличный расчет<br>
+					<input class="noUniform" id="payType1" type="checkbox">Пластиковая карта<br>
+					<input class="noUniform" id="payType3" type="checkbox">Квитанция Сбербанка	
+	             </div>             
+	           </section>
+	        </fieldset>
+	      </form>
+	    </div>
+	    <div id="tabs-4">
+	      <form id="form549">         
+	      </form>
+	    </div>
+	    <div id="tabs-5">
+	      <form id="form5">         
+	        <fieldset>
+	        <!-- 
+	          <section>
+	            <label for="text_field">Адреса</label>               
+	            <div id="adders-items">
+		            <div style="width:100%">
+			        	<div style="width:300px; float:left">
+					        <input type="text" value="Название"><br>
+					        <input type="text" value="Адрес"><br>
+					        <input type="text" value="Подпись к картинке">
+			        	</div>
+			        	<div style="float:left">
+		              		<img src="/vars/files/images/no-image.png" style="width:100px" class="logoimage">
+		              		<a class="logoimage_link" href="javascript:void(0)">Изменить</a>
+		            	</div>
+			        </div>
+	            	<br style="clear:both"><br>
+	            	<button class="i_plus icon smal green" id="addToAdders" onclick="addToAdders();">Добавить</button>
+	            </div>             
+			  </section>
+	           
+	            -->
+	           
+	           
+	          <section>
+	             <label for="text_field">Отзывы</label>
+	             <div>        
+	             	<table>
+	            		<thead>
+	            			<tr>
+	            				<th>Заголовок</th><th>Текст</th><th width="100">Дата добавления</th>
+	            			</tr>
+	            		</thead>
+	            		<tbody id="reviews-block">
+	            			
+	            		</tbody>
+	            		
+	            	</table>
+		            <button class="i_plus icon smal green" onclick="showReviewDialog(false);">Добавить</button>
+	             </div>             
+	          </section>
+	        </fieldset>
+	      </form>
+	    </div>
+	    
+	    <div id="tabs-6">
+	      <form id="form6">         
+	        <fieldset>
+	           
+	           
+	          <section>
+	             <label for="text_field">Добавьте ссылки на ваши страницы в социальных сетях.</label>
+	             <div>        
+	             	Facebook:<br>
+		            <input type="text" name="b_facebook" id="b_facebook"><br><br>
+		            Twitter:<br>
+		            <input type="text" name="b_twitter" id="b_twitter"><br><br>
+		            Вконтакте:<br>
+		            <input type="text" name="b_vk" id="b_vk"><br><br>
+		            Youtube:<br>
+		            <input type="text" name="b_youtube" id="b_youtube"><br><br>
+		            Skype:<br>
+		            <input type="text" name="b_skype" id="b_skype"><br><br>
+		            Однокласники:<br>
+		            <input type="text" name="b_odno" id="b_odno"><br><br>
+		            Мой мир:<br>
+		            <input type="text" name="b_mir" id="b_mir"><br><br>
+		            Google +:<br>
+		            <input type="text" name="b_goog" id="b_goog"><br><br>		            
+	             </div>             
+	          </section>
+	        </fieldset>
+	      </form>
+	    </div>
+	    
+	    
+	    
+	    
+	   
+	    
+	    
+	    <br style="clear:both">
+	    <br>
+	    <button style="float:right;margin-right:10px" onclick="$('#shopSettingDialog').dialog('destroy');">Отмена</button><button style="float:right" onclick="saveSiteSettingForm()">Сохранить</button>
+	    <br style="clear:both">
+	    <br>
+	</div>
+	
+</div>
+
+<div id="sitesWizard" style="display:none">
+  <form>
+  <ul id="breadcrumbs_menu" class="breadcrumb" data-connect="breadcrumbcontent">
+	<li class="i_globe"><a>Основные настройки</a></li>
+	<li class="i_delicious"><a>Выбор шаблона</a></li>
+    <li class="i_expose"><a>Дополнительные опции</a></li>
+    <li class="i_finish_flag"><a>Сохранение</a></li>
+  </ul>
+  <div id="breadcrumbcontent">
+    <div><div>
+    	<label>Основные настройки сайта</label>
+        <fieldset>
+          <section>
+            <label>Название сайта:</label>
+            <div ><input id="wizard-name" class="tooltip" title="Используется в основном в панели управления"></div>
+          </section>
+          <section>
+            <label>Доменное имя:</label>
+            <div>
+            	<span id="siteDomainNameCont">
+            		<span id="siteDomainNameContDef"  style="font-size:16px; font-weight:bold" class="tooltip" title="Домен третьего уровня в зоне ncity.biz получают все наши клиенты. Если хотите использовать свой домен, измените этот параметр кликнув по одной из ссылок правее.">http://{$subdomainForStart}.ncity.biz</span>
+            		<input type="hidden" id="domainIsReg" value="0">
+            	</span>
+            	
+              	<a onclick="siteWizard.addUrl();" class="tooltip" title="Если у Вас уже есть домен и Вы хотите его использовать для своего сайта, укажите это. В разделе &laquo;Помощь&raquo; Вы найдете подробную информацию о том как настроить существующий домен." href="javascript:void(0)" style="font-size:12px; font-weight:normal; padding-left:5px">Привязать свой домен</a>
+              	<a onclick="siteWizard.addDomainRequest();" class="tooltip" title="Вы можете оставить заявку на регистрацию нового домена. Подробнее по этой услуге можете проконсультироваться у наших менеджеров." href="javascript:void(0)" style="font-size:12px; font-weight:normal; padding-left:5px">Оставить заявку на новый домен</a>
+            </div>
+          </section>
+          <section>
+            <label>Номер телефона:</label>
+            <div><input id="wizard-phone" class="tooltip" title="Будет отображаться на сайте интернет магазина" style="width:250px" value="{$clientCompanyInfo.phone}"></div>
+          </section>
+          <section>
+            <label>Email:</label>
+            <div><input id="wizard-mail" class="tooltip" title="Будет отображаться на сайте интернет магазина" style="width:250px" value="{$clientCompanyInfo.mail}"></div>
+          </section>
+          <section>
+            <label>Логотип:</label>
+            <div><img src="/vars/files/images/no-image.png" style="width:100px" id="logoimage" class="logoimage"><a id="logoimage_link" class="logoimage_link" href="javascript:void(0)">Изменить</a></div>
+          </section>
+          <section>
+            <label>Favicon:</label>
+            <div><img src="/vars/files/images/no-image.png" style="width:100px" id="iconimage" class="iconimage"><a id="iconimage_link" class="iconimage_link" href="javascript:void(0)">Изменить</a></div>
+          </section>
+          <hr>
+          <div style="float:right"><button onclick="siteWizard.step1()">Далее</button></div><br style="clear:both">
+        </fieldset>
+    </div></div>
+    <div><div>
+    	<fieldset>
+    		<div class="tab">
+		        <ul>
+		            <li><a href="#tpl-tabs-1">Стандартные шаблоны</a></li>
+		            <!-- <li><a href="#tpl-tabs-2">Премиум шаблоны</a></li>  -->
+		            <!-- <li><a href="#tpl-tabs-3">Создать свой шаблон</a></li> -->
+		        </ul>
+				<div id="tpl-tabs-1">
+					<div class="template-list">
+			            <div class="template-item" template-id="3">
+			              <div class="title">Tech shop</div>
+			              <img style="display:none;"  src="{$static}images/tech_templ_icon.png">
+			              <div>
+			              <a title="Просмотр" 
+			              		onclick="window.open('{$static}images/tmpl_tech.png', 'Просмотр', 'width=550, height=350, status=no, resizable=no, top=200, left=200');return false;" href="{$static}images/tmpl_tech.png" target="_blank">
+			              <img  src="{$static}images/tech_templ_icon.png"></a></div>
+			              <div class="action"><button class="i_tick icon small" onclick="siteWizard.step2(this)">Выбрать</button></div>
+			            </div>
+			            <!-- 
+			            <div class="template-item" template-id="2">
+			              <div class="title">Creative</div>
+			              <div><img src="{$static}images/creative_templ_icon.png"></div>
+			              <div class="action"><button class="i_tick icon small" onclick="siteWizard.step2(this)">Выбрать</button></div>
+			            </div>
+			             -->
+					</div>
+				</div>
+    			<!--<div id="tpl-tabs-2">
+					<div class="template-list">
+			            <div class="template-item" template-id="1">
+			              <div class="title">Talentagent</div>
+			              <div><img src="http://www.freecsstemplates.org/download/thumbnail/talentagent/"></div>
+			              <div class="action"><button class="i_tick icon small" onclick="siteWizard.payTpl(this)">Купить</button></div>
+			            </div>
+			            <div class="template-item" template-id="2">
+			              <div class="title">Goodlife</div>
+			              <div><img src="http://www.freecsstemplates.org/download/thumbnail/goodlife/"></div>
+			              <div class="action"><button class="i_tick icon small" onclick="siteWizard.payTpl(this)">Купить</button></div>
+			            </div>
+			            <div class="template-item">
+			              <div class="title">Uncovered</div>
+			              <div><img src="http://www.freecsstemplates.org/download/thumbnail/uncovered/"></div>
+			              <div class="price"></div>
+			              <div class="action"><button class="i_tick icon small" onclick="siteWizard.payTpl(this)">Купить</button></div>
+			            </div>
+			            <div class="template-item">
+			              <div class="title">Openhouse</div>
+			              <div><img src="http://www.freecsstemplates.org/download/thumbnail/openhouse/"></div>
+			              <div class="price">$ 900</div>
+			              <div class="action"><button class="i_tick icon small" onclick="siteWizard.payTpl(this)">Купить</button></div>
+			            </div>
+			            <div class="template-item">
+			              <div class="title">Minimumlimit</div>
+			              <div><img src="http://www.freecsstemplates.org/download/thumbnail/minimumlimit/"></div>
+			              <div class="price">$ 900</div>
+			              <div class="action"><button class="i_tick icon small" onclick="siteWizard.payTpl(this)">Купить</button></div>
+			            </div>
+			            <div class="template-item">
+			              <div class="title">Talentagent</div>
+			              <div><img src="http://www.freecsstemplates.org/download/thumbnail/talentagent/"></div>
+			              <div class="price">$ 900</div>
+			              <div class="action"><button class="i_tick icon small" onclick="siteWizard.payTpl(this)">Купить</button></div>
+			            </div>
+			            <div class="template-item" template-id="1">
+			              <div class="title">Talentagent</div>
+			              <div><img src="http://www.freecsstemplates.org/download/thumbnail/talentagent/"></div>
+			              <div class="action"><button class="i_tick icon small" onclick="siteWizard.payTpl(this)">Купить</button></div>
+			            </div>
+			            <div class="template-item" template-id="2">
+			              <div class="title">Goodlife</div>
+			              <div><img src="http://www.freecsstemplates.org/download/thumbnail/goodlife/"></div>
+			              <div class="action"><button class="i_tick icon small" onclick="siteWizard.payTpl(this)">Купить</button></div>
+			            </div>
+			            <div class="template-item">
+			              <div class="title">Uncovered</div>
+			              <div><img src="http://www.freecsstemplates.org/download/thumbnail/uncovered/"></div>
+			              <div class="price"></div>
+			              <div class="action"><button class="i_tick icon small" onclick="siteWizard.payTpl(this)">Купить</button></div>
+			            </div>
+			            <div class="template-item">
+			              <div class="title">Openhouse</div>
+			              <div><img src="http://www.freecsstemplates.org/download/thumbnail/openhouse/"></div>
+			              <div class="price">$ 900</div>
+			              <div class="action"><button class="i_tick icon small" onclick="siteWizard.payTpl(this)">Купить</button></div>
+			            </div>
+			            
+			            <br style="clear:both">
+			            <div style="float:left" class="dataTables_info">Показано с 1 по 10 из 214 шаблонов</div>
+			            <div style="float:right" class="dataTables_paginate paging_full_numbers">
+			              <span class=" paginate_button"><</span>
+			              <span>
+			                <span class="paginate_active">1</span>
+			                <span class="paginate_button">2</span>
+			                <span class="paginate_button">3</span>
+			              </span>
+			              <span class=" paginate_button">></span>
+			            </div>
+			            <br style="clear:both"><br style="clear:both">
+					</div>
+				</div>
+				<div id="tpl-tabs-3">
+				
+				</div>
+				-->
+			</div>
+			<hr>
+          	<div style="float:right"><button onclick="siteWizard.step2(false)">Далее</button></div><br style="clear:both">
+    	</fieldset>
+    </div></div>
+    
+    <div><div>
+    	<label>Дополнительные опции</label>
+        <fieldset>
+        
+          <section>
+            <label>Логин в системе Uniteller:</label>
+            <div><input id="wizard-merchant_id" style="width:250px" class="tooltip" title="Для осуществления приема платежей от Ваших клиентов в интернет магазине, Вы можете подключить систему приема платежей Uniteller. Для подключения услуги, обратитесь к нашим Менеджерам."></div>
+          </section>
+          
+          <section>
+            <label>Пароль в системе Uniteller:</label>
+            <div><input id="wizard-merchant_key" style="width:250px"></div>
+          </section>
+          
+          <section>
+            <label>Смс уведомления:</label>
+            	<div class="tooltip" title="Эта услуга позвояет оперативно сообщать сотрудникам о поступлении нового заказа."><input type="checkbox" id="wizard-sms_order" > Отправлять уведомления о поступлении нового заказа</div>
+            	<div class="tooltip" title="При изменении статуса заказа сотрудники будут получать смс уведомления."><input type="checkbox" id="wizard-sms_status" > Отправлять уведомления при изменении статуса заказа</div>
+          </section>
+          <hr>
+          <div style="float:right"><button onclick="siteWizard.step3()">Далее</button></div><br style="clear:both">
+        </fieldset>
+    </div></div>
+    <div><div>
+    	<label>Завершение настройки</label>
+    	<fieldset>
+    		<p style="font-size:16px; padding:16px;">
+    			Все настройки завершены и все готово к созданию нового сайта.<br>
+    			Для продолжения, нажмите на кнопку &laquo;Создать сайт&raquo;.
+    		</p>
+    		
+    		<div class="alert note" style="font-weight:normal; display:none" id="wizardAlarma">Внимание! Создание сайта может занять до 10 минут!</div>
+    		<div style="display:none; width:250px; margin:0 auto" id="loader-create"><img src="{$static}images/loading.gif"> Обработка...</div>
+    		<br><br>
+    		<button style="margin:0 auto;" class="i_tick icon green" id="doneWizardButton" onclick="siteWizard.step4()">Создать сайт</button>
+    		
+    	</fieldset>
+    </div></div>
+  </div>
+  </form>
+</div>

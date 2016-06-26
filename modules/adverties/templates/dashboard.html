@@ -1,0 +1,364 @@
+<script type="text/javascript" src="{$static}js/adverties.js"></script>
+
+<style type="text/css">
+ table#grid-contacts td, table#grid-contacts th {
+	padding: 1px;
+}
+
+table#grid-contacts div.checker {
+	margin-right: 0px;
+}
+
+</style>
+
+<div style="margin-bottom: 50px">
+  <h2 style="">Рекламные кампании</h2>
+  
+</div>
+Создать рекламную кампанию: 
+<button  class="i_mail icon small green" onclick="openCampSmsWizard(false)">СМС - рассылка</button>
+<button  class="i_flag_2 icon small green" onclick="alert('Вам не доступна эта услуга')">Спец. размещение купона</button>
+<button  class="i_image_2 icon small green" onclick="alert('Вам не доступна эта услуга')">Банер на intellcity.com</button><br><br>
+
+<ul class="gridFilters bg01">
+  <li class="title">Тип кампании</li>
+  <li class="filter">
+    <select id="filter-status" onchange="if(this.value  != 0) { grid.campaing.addFilter('type_id', this.value).start(); } else  { grid.campaing.removeFilter('type_id').start();}">
+      <option value="0" selected="selected">Любой</option>
+      {foreach from=$campaignTypes as=item}
+        <option value="{$item.id}">{$item.name}</option>
+      {/foreach}
+    </select>
+  </li>
+  
+  <li class="title ml-s">Статус</li>
+  <li class="filter">
+    <select id="filter-status" onchange="if(this.value  != 0) { grid.campaing.addFilter('status_id', this.value).start(); } else  { grid.campaing.removeFilter('status_id').start();}">
+      <option value="0" selected="selected">Любой</option>
+      {foreach from=$campaignStatuses as=item}
+        <option value="{$item.id}">{$item.name}</option>
+      {/foreach}
+    </select>
+  </li>
+  
+  <li class="title ml-s">Ответственный</li>
+  <li class="filter">
+    <select id="filter-status" onchange="if(this.value  != 0) { grid.campaing.addFilter('executor_id', this.value).start(); } else  { grid.campaing.removeFilter('executor_id').start();}">
+      <option value="0" selected="selected">Любой</option>
+      {foreach from=$myUsers as=item}
+        <option value="{$item.id}">{$item.name}</option>
+      {/foreach}
+    </select>
+  </li>
+</ul>
+<br style="clear:both">
+
+{supergrid name=campaing tpl=grid.defaul.html class=adverties method=getCampaign}
+  cols : [
+    {name : "name", title:"Название", align:"center", search:true, sort:true},
+    {name : "start_date", title:"Дата начала кампании", align:"center", search:true, sort:true, sorted:true,sort_type:"desc"},
+    {name : "end_date", title:"Дата окончания кампании", align:"center", search:true, sort:true},
+    {name : "status_name", title:"Этап", align:"center", search:true, sort:true},
+    {name : "type_name", title:"Тип кампании", align:"center", search:true, sort:true},
+    {name : "executor_name", title:"Ответственный", align:"center", search:true, sort:true},
+    {name : "auditory", title:"Охват аудитории", align:"center", search:true, sort:true},
+    {name : "budget", title:"Бюджет кампании", align:"center", search:true, sort:true},
+    {name : "budget_spent", title:"Расход бюджета", align:"center", search:true, sort:true}
+ ],
+ 
+ autoload:true,
+ click: "showCampaign({campaing_id})",
+ view : "list",
+ class:["odd","even"],
+ limit : 20
+{/grid}
+
+<div id="addCampSMS" style="display:none">
+  <form>
+	<ul class="breadcrumb"  data-numbers="true" data-connect="addCampSMSContent">
+		<li><a href="#">Название</a></li>
+		<li><a href="#">Содержание</a></li>
+		<li><a href="#">Объекты</a></li>
+		<li><a href="#">Бюджет</a></li>
+	</ul>
+	
+	<div id="addCampSMSContent">
+		<div style="display: none;">
+			<form id="form5">         
+		  		<fieldset>
+		  	 		<!-- <label for="text_field"><div class="i_users_2" style="background-position: 0px -4px; padding-left: 25px; background-repeat: no-repeat;" id="task_label_icon">Встреча</div></label>-->   
+		    		<section>
+		      			<label for="text_field">Название кампании</label>               
+		      			<div>
+		       				<input type="text" id="CampSMS-name">
+		      			</div>             
+		    		</section>
+		    		<section>
+		      			<label for="text_field">Ответственный</label>               
+		      			<div>
+		       				<select id="CampSMS-resp">
+						      {foreach from=$myUsers as=item}
+						        <option value="{$item.id}">{$item.name}</option>
+						      {/foreach}
+						    </select>
+		      			</div>             
+		    		</section>
+		    		<section>
+		      			<label for="text_field">Дата начала</label>               
+		      			<div>
+		       				<input id="CampSMS-date" type="text" class="date" data-value="now">
+							<input id="CampSMS-time" style="width:46px;" type="text" data-step="15" data-value="now" class="time" data-connect="task-date">
+		      			</div>             
+		    		</section>
+		    		<section>
+		      			<label for="text_field">Дата окончания</label>               
+		      			<div>
+		       				<input id="CampSMS-date-end" type="text" class="date" data-value="now">
+							<input id="CampSMS-time-end" style="width:46px;" type="text" data-step="15" data-value="now" class="time" data-connect="task-date">
+		      			</div>             
+		    		</section>
+		    	</fieldset>
+		    </form>
+			
+			<hr>
+			<button class="next icon small i_arrow_right">Далее</button>
+		</div>
+		<div style="display: none;">
+			<form id="form5">         
+		  		<fieldset>
+					<section>
+		      			<label for="text_field">Имя отправителя</label>               
+		      			<div>
+		       				<input type="text" id="CampSMS-senderName" style="width:250px" onkeyup="checkSenderName(this)">
+		       				<span><br>Будет отображаться у получателя на телефоне вместо номера<br></span>
+		       				<span>Допустимо использовать цифры, но не более 15 знаков либо<br>латинские символы, но не более 11 знаков</span>
+		      			</div>             
+		    		</section>
+		    		<section>
+		      			<label for="text_field">Текст сообщения</label>               
+		      			<div>
+		       				<textarea style="height:150px;" onkeyup="checkTextCount(this)" id="CampSMS-text"></textarea>
+		       				<div style="font-size:12px">Всего символов: <span id="smsSymbolCount">0</span> Частей смс сообщения: <span id="smsPartCount">0</span></div>
+		      			</div>             
+		    		</section>
+			
+				</fieldset>
+			</form>
+			<hr>
+			<button class="prev icon small i_arrow_left">Назад</button>
+			<button class="next icon small i_arrow_right">Далее</button>
+		</div>
+		<div style="display: none; margin-top:-17px;">
+			
+				<h2>Контакты из CRM</h2>    
+				
+	      			{supergrid name=contacts tpl=grid.group_action.html class=crm_client method=getContacts}
+					  cols : [
+					    {name : "contacts-checked", title:"-", align:"center", search:false, sort:false, type:"checkbox", click:"checkPhonesFromList(this, {id})"},
+					    {name : "contact_name", title:"фио", align:"center", search:true, sort:true},
+					    {name : "company_name", title:"компания", align:"center", search:true, sort:true},
+					    {name : "source_name", title:"источник", align:"center", search:true, sort:true},
+					    {name : "date", title:"добавлен", align:"center", search:true, sort:true},
+					    {name : "cnt", title:"номеров", align:"center", search:true, sort:true}
+					 ],
+					 
+					 autoload:false,
+					 view : "list",
+					 class:["odd","even"],
+					 limit : 20
+					{/grid}	
+					
+					<div style="font-size: 16px;">Выбрано номеров: <SPAN id="phonescounter">0</SPAN> Выбрано контактов: <SPAN id="phonescounterContact">0</SPAN></div>     			
+		    
+			<hr>
+			<button class="prev icon small i_arrow_left">Назад</button>
+			<button class="next icon small i_arrow_right">Далее</button>
+		</div>
+		<div style="display: none;">
+			<form>
+				<fieldset>
+				    <h2 style="font-size:16px; padding: 8px">Охват аудитории: <span style="font-size:16px" id="auditoryCounter">0 человек</span></h2>
+				    <h2 style="font-size:16px; padding: 8px">Текущий бюджет: <span style="font-size:16px" id="budgetCounter">0 руб.</span></h2>
+				 	<section>
+		      			<label for="text_field">Корректировка бюджета</label>               
+		      			<div>
+		       				<input type="text" style="width:150px" value="0" id="realSMSbudget"/> руб.<br/>
+		       				<span>Укажите сумму, которую Вы расчитываете потратить на кампанию.<br>В случае если она будет меньше полного бюджета,<br>сообщения получат не все адресаты.</span>
+		      			</div>             
+		    		</section>
+				
+				</fieldset>
+			</form>
+			<hr>
+			<button class="prev icon small i_arrow_left">Назад</button>
+			<button class="icon small green i_tick" onclick="startSMScamp()">Завершить</button>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div id="campaingSMSedit" style="display:none">
+	<div class="tab">
+	    <ul>
+	      <li><a href="#sms-tabs-1">Название</a></li>
+	      <li><a href="#sms-tabs-2">Содержание</a></li>
+	      <li><a href="#sms-tabs-3">Объекты</a></li>
+	      <li><a href="#sms-tabs-4">Бюджет</a></li>
+	    </ul>
+   		<div id="sms-tabs-1">
+   			<form id="form5">         
+		  		<fieldset>
+		    		<section>
+		      			<label for="text_field">Название кампании</label>               
+		      			<div>
+		       				<input type="text" id="eCampSMS-name">
+		      			</div>             
+		    		</section>
+		    		<section>
+		      			<label for="text_field">Ответственный</label>               
+		      			<div>
+		       				<select id="eCampSMS-resp">
+						      {foreach from=$myUsers as=item}
+						        <option value="{$item.id}">{$item.name}</option>
+						      {/foreach}
+						    </select>
+		      			</div>             
+		    		</section>
+		    		<section>
+		      			<label for="text_field">Дата начала</label>               
+		      			<div>
+		       				<input id="eCampSMS-date" type="text" class="date" data-value="now">
+							<input id="eCampSMS-time" style="width:46px;" type="text" data-step="15" data-value="now" class="time" data-connect="task-date">
+		      			</div>             
+		    		</section>
+		    		<section>
+		      			<label for="text_field">Дата окончания</label>               
+		      			<div>
+		       				<input id="eCampSMS-date-end" type="text" class="date" data-value="now">
+							<input id="eCampSMS-time-end" style="width:46px;" type="text" data-step="15" data-value="now" class="time" data-connect="task-date">
+		      			</div>             
+		    		</section>
+		    		<section>
+		      			<label for="text_field">Статус</label>               
+		      			<div id="smsCampaingStatuses">
+		      				<button id="BTNsmsStatus-1" style="display:none" class="delete blue icon i_chart_6"  onclick="">Работает</button>
+		       				<button id="BTNsmsStatus-2" style="display:none" class="delete green icon i_finish_flag"  onclick="">Завершено</button>
+		       				<button id="BTNsmsStatus-3" style="display:none" class="delete red icon i_cross"  onclick="">Отменено</button>
+		       				<button id="BTNsmsStatus-4" style="display:none" class="delete purple icon i_pausepause"  onclick="">Приостановлено</button>
+		       				<button id="BTNsmsStatus-5" style="display:none" class="delete yellow icon i_alarm_clock"  onclick="">Запланировано</button>
+		      			</div>             
+		    		</section>
+		    	</fieldset>
+		    </form>
+   		</div>
+   		
+   		<div id="sms-tabs-2">
+   		
+   		
+   		</div>
+   		
+   		<div id="sms-tabs-3">
+   		
+   		
+   		</div>
+   		
+   		<div id="sms-tabs-4">
+   		
+   		
+   		</div>
+   		<form>         
+		 <fieldset>
+		    <button onclick="$('#campaingSMSedit').dialog('destroy');" style="float:right;">Закрыть</button>
+		    <button id="campaing-SaveButton" class="save" style="float:right;" onclick="">Сохранить</button>
+		    <button id="campaing-DeleteButton" class="delete red icon i_trashcan" onclick="" style="float:left; display:none">Удалить</button>
+		 </fieldset>
+  		</form>
+   	</div>    
+</div>
+
+<div id="addCampSpecial" style="display:none">
+	<ul class="breadcrumb" data-numbers="true" data-connect="addCampSpecialContent">
+		<li><a href="#">Название</a></li>
+		<li><a href="#">Содержание</a></li>
+		<li><a href="#">Объекты</a></li>
+		<li><a href="#">Запуск</a></li>
+	</ul>
+	<div id="addCampSpecialContent">
+		<div style="display: none;">
+			1111111111111
+			
+			<hr>
+			<button class="next icon small i_arrow_right">Далее</button>
+		</div>
+		<div style="display: none;">
+			222222222222
+			
+			<hr>
+			<button class="prev icon small i_arrow_left">Назад</button>
+			<button class="next icon small i_arrow_right">Далее</button>
+		</div>
+		<div style="display: none;">
+			33333333333
+			
+			<hr>
+			<button class="prev icon small i_arrow_left">Назад</button>
+			<button class="next icon small i_arrow_right">Далее</button>
+		</div>
+		<div style="display: none;">
+			444444444444
+			
+			<hr>
+			<button class="prev icon small i_arrow_left">Назад</button>
+			<button class="icon small green i_tick" onclick="">Завершить</button>
+		</div>
+	</div>
+</div>
+
+
+
+<!--  
+<style type="text/css">
+ .bigIconsMenu, .bigIconsMenu li { list-style: none; padding: 0px; margin: 0px; }
+ .bigIconsMenu li { float: left; margin-right: 20px;  display: inline;  }
+ .bigIconsMenu li a { 
+	background: url("{$static}images/big_icon/largebut.png") no-repeat scroll 0 0 transparent;
+    color: #555555;
+    display: block;
+    height: 102px;
+    text-decoration: none;
+    width: 106px;
+ }
+ 
+ .bigIconsMenu li a:hover, .bigIconsMenu li.active a { 
+	background: url("{$static}images/big_icon/largebut_hover.png") no-repeat scroll 0 0 transparent;
+    color: #555555;
+    display: block;
+    height: 102px;
+    text-decoration: none;
+    width: 106px;
+ }
+ 
+ .bigIconsMenu li a img {
+ 	display: inline;
+    margin-left: 29px;
+    margin-top: 10px;
+    width: 48px;
+  }
+  
+ .bigIconsMenu li a span {
+  	display: block;
+    font-size: 11px;
+    margin-top: 0px;
+    text-align: center;
+    width: 100%;
+  }
+  
+</style>
+
+<ul class="bigIconsMenu">
+ <li class="sms"><a href="#"><img src="{$static}images/big_icon/Email.png" alt="СМС рассылка"><span>СМС рассылка и уведомления</span></a></li>
+ <li class="site"><a href="#"><img src="{$static}images/big_icon/Loading.png" alt="Реклама на портале"><span >Реклама на портале</span></a></li>
+</ul>
+
+-->
+
